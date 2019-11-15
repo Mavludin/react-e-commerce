@@ -1,0 +1,36 @@
+.Clothes, .Accessories {
+	display: flex;
+	justify-content: space-between;
+}
+
+figure {
+	margin: 0;
+	text-align: center;
+	box-shadow: 0 5px 10px #ccc;
+	margin: 10px;
+	display: inline-block;
+}
+
+figure img {
+	width: 	100%;
+}
+
+figcaption {
+	padding: 10px 0;
+}
+
+figure h4 {
+	font-size: 1em;
+}
+
+figure h4, figure p{
+	margin: 0;
+}
+
+.Brand {
+	color: #797979;
+}
+
+.Price {
+	color: crimson;
+}

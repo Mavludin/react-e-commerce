@@ -1,0 +1,124 @@
+header {
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.HeaderLeft, .HeaderRight {
+	display: flex;
+	align-items: center;
+	width: 50%;
+}
+
+.HeaderLeft {
+	justify-content: flex-start;
+}
+
+.HeaderRight {
+	justify-content: inherit;
+}
+
+.HeaderWrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.Logo a {
+	color: #000;
+	font-size: 2em;
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.Logo span {
+	font-weight: 100;
+}
+
+.TopMenu ul li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.TopMenu a {
+	text-transform: uppercase;
+	color: #000;
+	font-weight: 600;
+	transition: all 0.2s linear;
+	border-bottom: 2px solid transparent;
+}
+
+.TopMenu a:hover {
+	border-bottom: 2px solid #000;
+}
+
+form {
+	position: relative;
+    width: 315px;
+    padding: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+i {
+	color: gray;
+}
+
+form i {
+	position: absolute;
+	left: 4%;
+	top: 50%;
+    transform: translate(0, -50%);
+}
+
+input {
+    outline: none;
+    border: 0;
+    width: 85%;
+    position: absolute;
+    left: 12%;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
+}
+
+input:focus::placeholder {
+	color: transparent;
+}
+
+.Cart {
+	display: flex;
+	align-items: center;
+}
+
+.Cart i {
+	font-size: 1.3em;
+	margin-right: 20px;
+	color: #000;
+	position: relative;
+}
+
+.Counter {
+	position: absolute;
+    background-color: #007eff;
+    border-radius: 50%;
+	top: -18px;
+	right: -15px;
+    width: 15px;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.Avatar {
+	width: 40px;
+	border-radius: 50%;
+	border: 3px solid #ccc;
+}
