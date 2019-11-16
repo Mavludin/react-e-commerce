@@ -1,0 +1,54 @@
+footer {
+	background-color: #333;
+	position: relative;
+}
+
+.FooterWrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+footer h3 {
+	text-align: left;
+	color: #007eff;
+	position: relative;
+	margin: 0;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+	font-weight: 100;
+}
+
+footer h3::after {
+	content: " ";
+	background: url('../img/footer-heading-border.jpg') bottom left repeat-x;
+	width: 150px;
+	height: 1px;
+	left: 0;
+	bottom: 0;
+	position: absolute;
+}
+
+footer ul {
+	padding: 0;
+}
+
+footer li {
+	margin-bottom: 2px;
+}
+
+footer a {
+	color: #a8a8a8;
+	transition: all 0.2s linear;
+}
+
+footer a:hover {
+	color: #007eff;
+}
+
+#edyoda-logo {
+	position: fixed;
+	bottom: 2%;
+	right: 1%;
+	width: 8%;
+	z-index: 10;
+}

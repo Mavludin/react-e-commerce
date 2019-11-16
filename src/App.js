@@ -1,22 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 import HomePage from './components/HomePage';
 import Details from './components/Details';
+import Checkout from './components/Checkout';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
+import classes from './modules/App.module.css';
+
+class App extends React.Component {
+
+  render() {
+
+    return (
+      <BrowserRouter>
+        <div className="App">
           <Switch>
             <Route path="/details/:productId" component={Details} />
+            <Route path="/checkout" component={Checkout} />
             <Route path="/" component={HomePage} />
           </Switch>
-      </div>
-    </BrowserRouter>
-  );
+
+          <img className={classes.EdyodaLogo} src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo"></img>
+        </div>
+      </BrowserRouter>
+    );
+
+  }
 }
 
 export default App;

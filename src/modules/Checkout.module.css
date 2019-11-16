@@ -1,0 +1,65 @@
+.KindaBlock {
+	display: flex;
+	justify-content: space-between;
+}
+
+.TotalItems {
+	font-size: 1.2em;
+}
+
+.LeftCheck {
+	width: 60%;
+}
+
+.RightCheck {
+	width: 40%;
+	max-height: 155px;
+	box-shadow: 5px 5px 10px #ccc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.RightCheck  h2 {
+	margin: 0;
+	color: #007eff;
+}
+
+.Desc span {
+	font-weight: bold;
+	color: black;
+	font-size: 1.2em;
+}
+
+.Item {
+	box-shadow: 5px 5px 10px #ccc;
+	border-radius: 10px;
+	padding: 10px;
+	overflow: hidden;
+	width: 70%;
+	margin-bottom: 15px;
+}
+
+.Item h4 {
+	margin: 0;
+}
+
+.Item img {
+	width: 70px;
+	float: left;
+	margin-right: 10px;
+	border-radius: 5px;
+}
+
+.Checkout .Item {
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.Checkout .Item:hover {
+	background-color: #eaeaea;
+}
+
+.LeftCheck .Desc {
+	margin-bottom: 0;
+}

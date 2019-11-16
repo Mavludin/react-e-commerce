@@ -29,3 +29,11 @@ main {
 	max-width: 1140px;
 	margin: 0 auto;
 }
+
+.EdyodaLogo {
+	position: fixed;
+	bottom: 2%;
+	right: 1%;
+	width: 8%;
+	z-index: 10;
+}

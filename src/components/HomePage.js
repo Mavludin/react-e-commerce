@@ -3,35 +3,40 @@ import React from 'react';
 import classes from '../modules/HomePage.module.css';
 import mutualClasses from '../modules/App.module.css';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Header from './Header';
+import Footer from './Footer';
 
 class HomePage extends React.Component {
 
-    state={
-        ProductData : [],
+    state = {
+        ProductData: [],
+        amountOfProducts: 0
     }
 
     componentDidMount() {
         axios.get('https://5d76bf96515d1a0014085cf9.mockapi.io/product')
-        .then(response=>{
-            this.setState({ProductData : response.data})
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(response => {
+                console.log(response.data)
+
+                this.setState({ ProductData: response.data })
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     render() {
 
         const clothesDataRender = this.state.ProductData.map(item => {
-            if(!item.isAccessory) {
+            if (!item.isAccessory) {
                 return (
+
                     <figure key={item.id} id={item.id}>
                         <Link to={`/details/${item.id}`}>
-                            <img src={item.preview} />
+                            <img src={item.preview} alt={item.name} />
                         </Link>
                         <figcaption>
                             <h4>{item.name}</h4>
@@ -39,16 +44,19 @@ class HomePage extends React.Component {
                             <p className={classes.Price}>{item.price}</p>
                         </figcaption>
                     </figure>
+
                 )
             }
+
+
         });
 
         const AccessoriesDataRender = this.state.ProductData.map(item => {
-            if(item.isAccessory) {
+            if (item.isAccessory) {
                 return (
                     <figure key={item.id} id={item.id}>
                         <Link to={`/details/${item.id}`}>
-                            <img src={item.preview} />
+                            <img src={item.preview} alt={item.name} />
                         </Link>
                         <figcaption>
                             <h4>{item.name}</h4>
@@ -68,9 +76,9 @@ class HomePage extends React.Component {
                 <main>
 
                     <div className={mutualClasses.Container}>
-                    
+
                         <div className={classes.Products}>
-                        
+
                             <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
                             <div className={classes.Clothes}>
@@ -88,7 +96,9 @@ class HomePage extends React.Component {
                     </div>
 
                 </main>
-                
+
+                <Footer />
+
             </div>
 
         )
