@@ -39,7 +39,7 @@ class Header extends React.Component {
                             <div className={classes.Cart}>
 
                                 <Link to='/checkout'>
-                                    <i className="fas fa-cart-arrow-down" ><span></span></i>
+                                    <i className="fas fa-cart-arrow-down" ><span className={classes.Counter}>{localStorage.getItem('amountOfProducts')}</span></i>
                                 </Link>
 
                                 <img className={classes.Avatar} src={avatar} alt="Avatar" />

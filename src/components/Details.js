@@ -13,17 +13,35 @@ class Details extends React.Component {
   state = {
     detailsData: {},
     thumbnails: [],
-    amountOfProduct: 0
+    amountOfProducts: 0
   }
 
+  componentDidMount() {
+    const productId = this.props.match.params.productId;
+
+    if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
+
+      axios.get(`https://5d76bf96515d1a0014085cf9.mockapi.io/product/${productId}`)
+        .then(response => {
+          this.setState({ detailsData: response.data, thumbnails: response.data.photos })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+    }
+  }
 
   onAddtoCartClick = () => {
 
-    this.setState({ amountOfProduct: this.state.amountOfProduct++ });
+    let updatedAmount = this.state.amountOfProducts;
+    updatedAmount++;
 
+    this.setState({ amountOfProducts: updatedAmount });
 
-    console.log(this.state.amountOfProduct);
+    console.log(this.state.amountOfProducts);
 
+    localStorage.setItem('amountOfProducts', this.state.amountOfProducts);
 
     // if (localStorage) {
     //   let myArray;
@@ -50,23 +68,6 @@ class Details extends React.Component {
 
   }
 
-
-  componentDidMount() {
-    const productId = this.props.match.params.productId;
-
-    if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
-
-      axios.get(`https://5d76bf96515d1a0014085cf9.mockapi.io/product/${productId}`)
-        .then(response => {
-          this.setState({ detailsData: response.data, thumbnails: response.data.photos })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-    }
-  }
-
   render() {
 
     const detailsDataRender = this.state.detailsData;
@@ -88,7 +89,7 @@ class Details extends React.Component {
 
       <div className="App">
 
-        < Header />
+        < Header amountOfProducts={this.state.amountOfProducts} />
 
         <main>
           <div className={[mutualClasses.Container, classes.Details].join(' ')} >
