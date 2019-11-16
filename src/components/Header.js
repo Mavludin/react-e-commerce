@@ -10,6 +10,13 @@ import avatar from '../img/avatar.jpg';
 class Header extends React.Component {
 
     render() {
+
+        let CounterClass = "";
+
+        if (localStorage.getItem('amountOfProducts')) {
+            CounterClass = classes.Counter;
+        }
+
         return (
             <div className="App">
 
@@ -39,7 +46,10 @@ class Header extends React.Component {
                             <div className={classes.Cart}>
 
                                 <Link to='/checkout'>
-                                    <i className="fas fa-cart-arrow-down" ><span className={classes.Counter}>{localStorage.getItem('amountOfProducts')}</span></i>
+                                    <i className="fas fa-cart-arrow-down" >
+                                        <span className={CounterClass}>
+                                            {localStorage.getItem('amountOfProducts')}
+                                        </span></i>
                                 </Link>
 
                                 <img className={classes.Avatar} src={avatar} alt="Avatar" />
