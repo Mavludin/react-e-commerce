@@ -38,6 +38,7 @@
 	overflow: hidden;
 	width: 70%;
 	margin-bottom: 15px;
+	cursor: pointer;
 }
 
 .Item h4 {
@@ -62,4 +63,8 @@
 
 .LeftCheck .Desc {
 	margin-bottom: 0;
+}
+
+button:hover {
+	background-color: #3a99fb;
 }

@@ -27,7 +27,7 @@ header {
 }
 
 .Logo a {
-	color: #000;
+	color: #007eff;
 	font-size: 2em;
 	font-weight: 900;
 	text-transform: uppercase;
@@ -35,6 +35,7 @@ header {
 
 .Logo span {
 	font-weight: 100;
+    color: #000;
 }
 
 .TopMenu ul li {

@@ -10,10 +10,18 @@ import mutualClasses from '../modules/App.module.css';
 
 class Details extends React.Component {
 
+  // ifLocal = () => {
+  //   const amountOfProducts = localStorage['amountOfProducts'];
+
+  //   if (amountOfProducts !== undefined && amountOfProducts !== null && amountOfProducts !== '') return amountOfProducts;
+  //   else return 1;
+
+  // }
+
   state = {
     detailsData: {},
     thumbnails: [],
-    amountOfProducts: 0
+    amountOfEachProduct: 0
   }
 
   componentDidMount() {
@@ -34,37 +42,37 @@ class Details extends React.Component {
 
   onAddtoCartClick = () => {
 
-    let updatedAmount = this.state.amountOfProducts;
-    updatedAmount++;
+    let AmountOfProducts;
 
-    this.setState({ amountOfProducts: updatedAmount });
+    if (!localStorage['amountOfProducts']) AmountOfProducts = 0;
 
-    console.log(this.state.amountOfProducts);
+    else {
+      AmountOfProducts = localStorage['amountOfProducts'];
+    }
+    AmountOfProducts++;
 
-    localStorage.setItem('amountOfProducts', this.state.amountOfProducts);
+    localStorage.setItem('amountOfProducts', AmountOfProducts);
 
-    // if (localStorage) {
-    //   let myArray;
 
-    //   if (!localStorage['array']) myArray = [];
+    let AmountOfEachProduct;
 
-    //   else {
-    //     myArray = JSON.parse(localStorage['myArray']);
+    if (!localStorage[`product_${this.props.match.params.productId}`]) AmountOfEachProduct = 0;
 
-    //   }
+    else AmountOfEachProduct = JSON.parse(localStorage[`product_${this.props.match.params.productId}`]).amount;
 
-    //   const obj = {
-    //     'id': this.state.detailsData.id,
-    //     'thumbnail': this.state.detailsData.preview,
-    //     'name': this.state.detailsData.name,
-    //     'price': this.state.detailsData.price,
-    //   };
+    AmountOfEachProduct++;
 
-    //   myArray.push(obj);
+    this.setState({ amountOfEachProduct: AmountOfEachProduct });
 
-    //   localStorage.setItem('array', JSON.stringify(myArray));
+    const obj = {
+      'id': this.state.detailsData.id,
+      'thumbnail': this.state.detailsData.preview,
+      'name': this.state.detailsData.name,
+      'price': this.state.detailsData.price,
+      'amount': AmountOfEachProduct
+    };
 
-    // }
+    localStorage.setItem(`product_${this.props.match.params.productId}`, JSON.stringify(obj));
 
   }
 
