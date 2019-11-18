@@ -45,10 +45,34 @@ footer a:hover {
 	color: #007eff;
 }
 
-#edyoda-logo {
-	position: fixed;
-	bottom: 2%;
-	right: 1%;
-	width: 8%;
-	z-index: 10;
+@media screen and (max-width: 900px) {
+
+	.FooterWrap div {
+		width: 40%;
+	}
+
+	.FooterWrap {
+		flex-wrap: wrap;
+		justify-content: end;
+	}
+
+	footer h3 {
+		margin-top: 10px;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+
+	.FooterWrap div {
+		width: 90%;
+	}
+
+}
+
+@media screen and (max-width: 414px) {
+
+	.EdyodaLogo {
+		width: 25%;
+	}
 }

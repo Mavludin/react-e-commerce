@@ -37,3 +37,46 @@ main {
 	width: 8%;
 	z-index: 10;
 }
+
+@media screen and (max-width: 900px) {
+
+	h1, h2 {
+		font-size: 1.8em;
+	}
+
+	.EdyodaLogo {
+		width: 12%;
+	}
+
+}
+
+@media screen and (max-width: 700px) {
+
+	h1, h2 {
+		font-size: 	1.5em;
+	}
+
+	.EdyodaLogo {
+		width: 18%
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+
+	header .Container{
+		padding: 10px 0;
+	}
+}
+
+@media screen and (max-width: 414px) {
+
+	h1, h2 {
+		font-size: 1.2em;
+	}
+
+	.EdyodaLogo {
+		width: 25%;
+	}
+
+}

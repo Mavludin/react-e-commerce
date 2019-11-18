@@ -40,3 +40,49 @@ figure h4, figure p{
 .Price {
 	color: crimson;
 }
+
+@media screen and (max-width: 900px) {
+
+	.Clothes, .Accessories {
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+
+	figure {
+		width: 22%;
+	}
+
+}
+
+@media screen and (max-width: 700px) {
+
+	figure {
+		width: 30%;	
+	}
+}
+
+@media screen and (max-width: 600px) {
+
+	h1, h2 {
+		text-align: center;
+	}
+
+	figure {
+		width: 48%;
+		margin: 0;
+		margin-bottom: 15px;
+	}
+
+}
+
+@media screen and (max-width: 414px) {
+
+	.Clothes, .Accessories {
+		justify-content: center;
+	}
+
+	figure {
+		width: 80%;
+	}
+
+}

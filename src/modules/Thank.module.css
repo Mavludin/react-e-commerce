@@ -1,0 +1,17 @@
+.Thank {
+	text-align: center;
+}
+
+.Thank i{
+	font-size: 15em;
+	color: #007eff;
+}
+
+.Thank h1, p {
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.Desc {
+    color: #797979;
+}

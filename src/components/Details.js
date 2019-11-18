@@ -7,61 +7,33 @@ import Footer from './Footer';
 
 import classes from '../modules/Details.module.css';
 import mutualClasses from '../modules/App.module.css';
+import mediaQueries from '../modules/Media.module.css';
+
 
 class Details extends React.Component {
-
-  // ifLocal = () => {
-  //   const amountOfProducts = localStorage['amountOfProducts'];
-
-  //   if (amountOfProducts !== undefined && amountOfProducts !== null && amountOfProducts !== '') return amountOfProducts;
-  //   else return 1;
-
-  // }
 
   state = {
     detailsData: {},
     thumbnails: [],
-    amountOfEachProduct: 0
-  }
-
-  componentDidMount() {
-    const productId = this.props.match.params.productId;
-
-    if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
-
-      axios.get(`https://5d76bf96515d1a0014085cf9.mockapi.io/product/${productId}`)
-        .then(response => {
-          this.setState({ detailsData: response.data, thumbnails: response.data.photos })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-    }
+    amountOfEachProduct: 0,
+    previewImage: '',
+    thumbnailPos: 0
   }
 
   onAddtoCartClick = () => {
 
     let AmountOfProducts;
-
     if (!localStorage['amountOfProducts']) AmountOfProducts = 0;
-
     else {
       AmountOfProducts = localStorage['amountOfProducts'];
     }
     AmountOfProducts++;
-
     localStorage.setItem('amountOfProducts', AmountOfProducts);
 
-
     let AmountOfEachProduct;
-
     if (!localStorage[`product_${this.props.match.params.productId}`]) AmountOfEachProduct = 0;
-
     else AmountOfEachProduct = JSON.parse(localStorage[`product_${this.props.match.params.productId}`]).amount;
-
     AmountOfEachProduct++;
-
     this.setState({ amountOfEachProduct: AmountOfEachProduct });
 
     const obj = {
@@ -76,6 +48,31 @@ class Details extends React.Component {
 
   }
 
+  selectCurrentThumbnail = (pos) => {
+    this.setState({previewImage: this.state.detailsData.photos[pos], thumbnailPos: pos})
+  }
+
+  componentDidMount() {
+    const productId = this.props.match.params.productId;
+
+    if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
+
+      axios.get(`https://5d76bf96515d1a0014085cf9.mockapi.io/product/${productId}`)
+        .then(response => {
+          this.setState(
+            {
+              detailsData: response.data, 
+              thumbnails: response.data.photos, 
+              previewImage: response.data.photos[0]
+           })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+    }
+  }
+
   render() {
 
     const detailsDataRender = this.state.detailsData;
@@ -83,19 +80,19 @@ class Details extends React.Component {
 
       let ClassesArr = [classes.Thumbnail];
 
-      if (pos === 0) {
+      if (pos === this.state.thumbnailPos) {
         ClassesArr.push(classes.SelectedThumbnail);
       }
 
       return (
-        <img className={ClassesArr.join(' ')} src={item} alt="Thumbnail" key={pos} />
+        <img onClick={()=>this.selectCurrentThumbnail(pos)} className={ClassesArr.join(' ')} src={item} alt="Thumbnail" key={pos} />
       )
 
     });
 
     return (
 
-      <div className="App">
+      <div>
 
         < Header amountOfProducts={this.state.amountOfProducts} />
 
@@ -103,7 +100,7 @@ class Details extends React.Component {
           <div className={[mutualClasses.Container, classes.Details].join(' ')} >
 
             <div className={classes.Left}>
-              <img src={detailsDataRender.preview} alt={detailsDataRender.name} />
+              <img src={this.state.previewImage} alt={detailsDataRender.name} />
             </div>
 
             <div className={classes.Right}>

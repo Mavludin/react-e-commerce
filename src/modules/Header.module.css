@@ -26,9 +26,53 @@ header {
 	justify-content: space-between;
 }
 
+.Hamb {
+	display: none;
+	cursor: pointer;
+}
+
+.Bar1, .Bar2, .Bar3 {
+	width: 30px;
+	height: 4px;
+	background-color: #333;
+	margin: 4px 0;
+	transition: 0.4s;
+}
+
+.HiddenMenu {
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: white;
+	text-align: center;
+	padding: 40px 10px;
+	transform: translateX(-100%);
+	transition: transform .2s ease-out;
+}
+
+.ShowHiddenMenu {
+	box-shadow: 1px 1px 5px #000;
+	transform: translateX(0%);
+}
+
+.HiddenMenu>div>i {
+	color: black;
+	font-size: 26px;
+	position: absolute;
+	top: 1%;
+	right: 3%;
+	cursor: pointer;
+	transition: color .2s;
+}
+
+.HiddenMenu>div>i:hover {
+	color: #007eff;
+}
+
 .Logo a {
 	color: #007eff;
-	font-size: 2em;
+	font-size: 2.5em;
 	font-weight: 900;
 	text-transform: uppercase;
 }
@@ -72,7 +116,8 @@ form i {
 	position: absolute;
 	left: 4%;
 	top: 50%;
-    transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	transition: .5s linear;
 }
 
 input {
@@ -93,23 +138,28 @@ input:focus::placeholder {
 	color: transparent;
 }
 
-.Cart {
+.HiddenCart, .Cart {
 	display: flex;
 	align-items: center;
 }
 
-.Cart i {
-	font-size: 1.3em;
+.HiddenCart i, .Cart i {
+	font-size: 1.5em;
 	margin-right: 20px;
 	color: #000;
 	position: relative;
+	margin-top: 10px;
+}
+
+.HiddenCart {
+	display: none;
 }
 
 .Counter {
 	position: absolute;
     background-color: #007eff;
     border-radius: 50%;
-	top: -18px;
+	top: -15px;
 	right: -15px;
     width: 15px;
     padding: 5px;
@@ -122,4 +172,102 @@ input:focus::placeholder {
 	width: 40px;
 	border-radius: 50%;
 	border: 3px solid #ccc;
+}
+
+@media screen and (max-width: 900px) {
+	.HeaderLeft {
+		flex-flow: column;
+		justify-content: space-around;
+	}
+
+	.HeaderRight {
+		flex-flow: column-reverse;
+	}
+
+	.TopMenu ul {
+		text-align: center;
+		padding: 0;
+	}
+
+	.Cart {
+		padding: 5px 0;
+	}
+
+	h1, h2 {
+		font-size: 1.8em;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+
+	header {
+		background-color: rgba(1,1,1,0.2);
+	}
+
+	header .Container{
+		padding: 0;
+	}
+
+	.HeaderWrap {
+		align-items: center;
+		padding: 10px 20px;
+		justify-content: space-around;
+	}
+
+	.Hamb {
+		display: block;
+	}
+
+	.HeaderLeft, .HeaderRight {
+		display: none;
+	}
+
+	.TopMenu {
+		display: block;
+		margin: 10px;
+	}
+
+	.TopMenu ul li {
+		display: block;
+		margin: 10px;
+	}
+
+	.TopMenu a {
+		font-size: 20px;
+		letter-spacing: 2px;
+	}
+
+	.Logo {
+		margin-bottom: 5px;
+	}
+
+	.HiddenCart {
+		display: flex;
+	}
+
+	h1, h2 {
+		text-align: center;
+	}
+
+	form {
+		width: 250px;
+	}
+
+	form input {
+		font-size: 0.8em;
+	}
+
+}
+
+@media screen and (max-width: 414px) {
+
+	input {
+		font-size: .9em;
+	}
+
+	h1, h2 {
+		font-size: 1.2em;
+	}
+
 }

@@ -1,0 +1,233 @@
+@media screen and (max-width: 900px) {
+	.HeaderLeft {
+		flex-flow: column;
+		justify-content: space-around;
+	}
+
+	.HeaderRight {
+		flex-flow: column-reverse;
+	}
+
+	.TopMenu ul {
+		text-align: center;
+		padding: 0;
+	}
+
+	.Cart {
+		padding: 5px 0;
+	}
+
+	h1, h2 {
+		font-size: 1.8em;
+	}
+
+	.Details h1 {
+		margin-bottom: 20px;
+	}
+
+	.Clothes, .Accessories {
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+
+	figure {
+		width: 22%;
+	}
+
+	.FooterWrap div {
+		width: 40%;
+	}
+
+	.FooterWrap {
+		flex-wrap: wrap;
+		justify-content: end;
+	}
+
+	footer h3 {
+		margin-top: 10px;
+	}
+
+	.EdyodaLogo {
+		width: 12%
+	}
+
+	.Left img {
+		width: 200px;
+	}
+
+	.Review {
+		width: 50px;
+	}
+
+	.Details {
+		flex-wrap: wrap;
+		text-align: center;
+	}
+
+	.Details h3{
+		margin: 0;
+	}
+
+	.Details .desc {
+		margin: 10px 0;
+	}
+
+	.Details .desc:last-of-type {
+		text-align: center;
+	}
+
+	button {
+		margin: 0 auto;
+	}
+
+	.Kindablock {
+		flex-wrap: wrap;
+	}
+
+	.Item {
+		margin: 0 auto;
+		width: 90%;
+		margin-bottom: 10px;
+	}
+
+	.Checkout h1, .TotalItems {
+		text-align: center;
+	}
+
+	.RightCheck {
+		text-align: center;
+	}
+
+	.Left, .Right, .Left-check, .RightCheck {
+		width: 100%;
+		display: inline-block;
+	}
+
+}
+
+@media screen and (max-width: 700px) {
+
+	figure {
+		width: 30%;	
+	}
+
+	h1, h2 {
+		font-size: 	1.5em;
+	}
+
+	.EdyodaLogo {
+		width: 18%
+	}
+
+	.Thank i {
+		font-size: 12em;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+
+	header .Container{
+		padding: 0;
+	}
+
+	.HeaderWrap {
+		flex-flow: column;
+		align-items: center;
+	}
+
+	.Hamb {
+		display: block;
+	}
+
+	.HeaderLeft {
+		opacity: 0;
+		height: 0;
+		overflow: hidden;
+		transition: opacity 1s ease-out;
+	}
+
+	.Change .Bar1 {
+		-webkit-transform: rotate(-45deg) translate(-5px, 5px);
+		transform: rotate(-45deg) translate(-5px, 5px);
+	}
+
+	.Change .Bar2 {opacity: 0;}
+
+	.Change .Bar3 {
+		-webkit-transform: rotate(45deg) translate(-4px, -6px);
+		transform: rotate(45deg) translate(-4px, -6px);
+	}
+
+	.Change .HeaderLeft {
+		opacity: 1;
+		height: auto;
+		overflow: visible;
+	}
+
+    .HeaderRight {
+        display: flex;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+	.Logo {
+		margin-bottom: 5px;
+	}
+
+	h1, h2 {
+		text-align: center;
+	}
+
+	figure {
+		width: 48%;
+		margin: 0;
+		margin-bottom: 15px;
+	}
+
+	.FooterWrap div {
+		width: 90%;
+	}
+
+	form {
+		width: 250px;
+	}
+
+	form input {
+		font-size: 0.8em;
+	}
+
+
+}
+
+@media screen and (max-width: 414px) {
+
+	.Logo a {
+		font-size: 1.5em;
+	}
+
+	input {
+		font-size: .9em;
+	}
+
+	h1, h2 {
+		font-size: 1.2em;
+	}
+
+	.Clothes, .Accessories {
+		justify-content: center;
+	}
+
+	figure {
+		width: 80%;
+	}
+
+	.EdyodaLogo {
+		width: 25%;
+	}
+
+	.Thank i {
+		font-size: 6em;
+	}
+
+}

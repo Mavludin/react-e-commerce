@@ -9,6 +9,22 @@ import avatar from '../img/avatar.jpg';
 
 class Header extends React.Component {
 
+    state = {
+        hiddenMenuClasses : [classes.HiddenMenu]
+    }
+
+    showHiddenMenu = () => {
+        let updatedClasses = this.state.hiddenMenuClasses;
+        updatedClasses = [classes.HiddenMenu, classes.ShowHiddenMenu].join(' ')
+        this.setState({hiddenMenuClasses: updatedClasses})
+    }
+
+    closeHiddenMenu = () => {
+        let updatedClasses = this.state.hiddenMenuClasses;
+        updatedClasses = [classes.HiddenMenu];
+        this.setState({hiddenMenuClasses: updatedClasses})
+    }
+
     render() {
 
         let CounterClass = "";
@@ -18,49 +34,88 @@ class Header extends React.Component {
         }
 
         return (
-            <div className="App">
 
-                <header>
+            <header>
 
-                    <div className={[mutualClasses.Container, classes.HeaderWrap].join(' ')}>
+                <div className={[mutualClasses.Container, classes.HeaderWrap].join(' ')}>
 
-                        <div className={classes.HeaderLeft}>
-                            <div className={classes.Logo}>
-                                <a href="/">Shop<span>Lane</span></a>
-                            </div>
-                            <nav className={classes.TopMenu}>
-                                <ul>
-                                    <li><a href="#clothes-heading">Clothing</a></li>
-                                    <li><a href="#accessories-heading">Accessories</a></li>
-                                </ul>
-                            </nav>
+                    <div onClick={this.showHiddenMenu} className={classes.Hamb}>
+                        <div className={classes.Bar1}></div>
+                        <div className={classes.Bar2}></div>
+                        <div className={classes.Bar3}></div>
+                    </div>
+
+                    <div className={classes.HiddenCart}>
+
+                        <Link to='/checkout'>
+                            <i className="fas fa-cart-arrow-down" >
+                                <span className={CounterClass}>
+                                    {localStorage.getItem('amountOfProducts')}
+                                </span></i>
+                        </Link>
+
+                        <img className={classes.Avatar} src={avatar} alt="Avatar" />
+                    </div>
+
+
+
+                    <div className={this.state.hiddenMenuClasses}>
+
+                        <div className={classes.Logo}>
+                            <a href="/">Shop<span>Lane</span></a>
                         </div>
+                        <nav className={classes.TopMenu}>
+                            <ul>
+                            <li><a href="#clothes-heading">Clothing</a></li>
+                            <li><a href="#accessories-heading">Accessories</a></li>
+                            </ul>
+                        </nav>
 
-                        <div className={classes.HeaderRight}>
-
-                            <form>
-                                <i className="fas fa-search"></i>
-                                <input type="search" name="search" placeholder="Search for Clothing and Accessories" />
-                            </form>
-
-                            <div className={classes.Cart}>
-
-                                <Link to='/checkout'>
-                                    <i className="fas fa-cart-arrow-down" >
-                                        <span className={CounterClass}>
-                                            {localStorage.getItem('amountOfProducts')}
-                                        </span></i>
-                                </Link>
-
-                                <img className={classes.Avatar} src={avatar} alt="Avatar" />
-                            </div>
-
+                        <div onClick={this.closeHiddenMenu}>
+                            <i className="fas fa-window-close"></i>
                         </div>
 
                     </div>
 
-                </header>
-            </div>
+                    <div className={classes.HeaderLeft}>
+
+                        <div className={classes.Logo}>
+                            <a href="/">Shop<span>Lane</span></a>
+                        </div>
+                        <nav className={classes.TopMenu}>
+                            <ul>
+                                <li><a href="#clothes-heading">Clothing</a></li>
+                                <li><a href="#accessories-heading">Accessories</a></li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                    <div className={classes.HeaderRight}>
+
+                        <form>
+                            <i className="fas fa-search"></i>
+                            <input type="search" name="search" placeholder="Search for Clothing and Accessories" />
+                        </form>
+
+                        <div className={classes.Cart}>
+
+                            <Link to='/checkout'>
+                                <i className="fas fa-cart-arrow-down" >
+                                    <span className={CounterClass}>
+                                        {localStorage.getItem('amountOfProducts')}
+                                    </span></i>
+                            </Link>
+
+                            <img className={classes.Avatar} src={avatar} alt="Avatar" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+         
         );
 
     }
