@@ -19,13 +19,14 @@ class HomePage extends React.Component {
     componentDidMount() {
         axios.get('https://5d76bf96515d1a0014085cf9.mockapi.io/product')
             .then(response => {
-                console.log(response.data)
+                console.log(response.data);
 
-                this.setState({ ProductData: response.data })
+                this.setState({ ProductData: response.data})
             })
             .catch(error => {
                 console.log(error);
             })
+
     }
 
     render() {
@@ -73,7 +74,7 @@ class HomePage extends React.Component {
 
                 <Header />
 
-                <main>
+                <main >
 
                     <div className={mutualClasses.Container}>
 

@@ -10,7 +10,9 @@ import avatar from '../img/avatar.jpg';
 class Header extends React.Component {
 
     state = {
-        hiddenMenuClasses : [classes.HiddenMenu]
+        hiddenMenuClasses : [classes.HiddenMenu],
+        boxShadow: 'none'
+
     }
 
     showHiddenMenu = () => {
@@ -25,6 +27,18 @@ class Header extends React.Component {
         this.setState({hiddenMenuClasses: updatedClasses})
     }
 
+    listenScrollEvent = e => {
+        if (window.scrollY > 10 && window.innerWidth >= 600) {
+          this.setState({boxShadow: 'rgb(204, 204, 204) 0px 2px 10px'})
+        } else {
+          this.setState({boxShadow: 'none'})
+        }
+    }
+    
+    componentDidMount() {
+        window.addEventListener('scroll', this.listenScrollEvent);
+    }
+
     render() {
 
         let CounterClass = "";
@@ -35,7 +49,7 @@ class Header extends React.Component {
 
         return (
 
-            <header>
+            <header style={{boxShadow: this.state.boxShadow}}>
 
                 <div className={[mutualClasses.Container, classes.HeaderWrap].join(' ')}>
 
@@ -58,7 +72,6 @@ class Header extends React.Component {
                     </div>
 
 
-
                     <div className={this.state.hiddenMenuClasses}>
 
                         <div className={classes.Logo}>
@@ -74,6 +87,11 @@ class Header extends React.Component {
                         <div onClick={this.closeHiddenMenu}>
                             <i className="fas fa-window-close"></i>
                         </div>
+
+                        <form>
+                            <i className="fas fa-search"></i>
+                            <input type="search" name="search" placeholder="Search for Clothing and Accessories" />
+                        </form>
 
                     </div>
 

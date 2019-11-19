@@ -68,3 +68,30 @@
 button:hover {
 	background-color: #3a99fb;
 }
+
+@media screen and (max-width: 900px) {
+
+	.KindaBlock {
+		flex-wrap: wrap;
+	}
+
+	.Item {
+		margin: 0 auto;
+		width: 90%;
+		margin-bottom: 10px;
+	}
+
+	.Checkout h1, .TotalItems {
+		text-align: center;
+	}
+
+	.RightCheck {
+		text-align: center;
+	}
+
+	.LeftCheck, .RightCheck {
+		width: 100%;
+		display: inline-block;
+	}
+
+}

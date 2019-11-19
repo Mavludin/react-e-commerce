@@ -20,10 +20,6 @@ a {
 	text-decoration: none;
 }
 
-main {
-    margin-top: 7%;
-}
-
 .Container {
     padding: 20px 10px;
 	max-width: 1140px;
@@ -39,6 +35,10 @@ main {
 }
 
 @media screen and (max-width: 900px) {
+
+	.Container {
+		padding: 10px;
+	}
 
 	h1, h2 {
 		font-size: 1.8em;
@@ -65,7 +65,7 @@ main {
 @media screen and (max-width: 600px) {
 
 	header .Container{
-		padding: 10px 0;
+		padding: 5px 0;
 	}
 }
 

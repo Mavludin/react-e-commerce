@@ -7,10 +7,9 @@ import Footer from './Footer';
 
 import classes from '../modules/Details.module.css';
 import mutualClasses from '../modules/App.module.css';
-import mediaQueries from '../modules/Media.module.css';
-
 
 class Details extends React.Component {
+
 
   state = {
     detailsData: {},
@@ -69,11 +68,12 @@ class Details extends React.Component {
         .catch(error => {
           console.log(error)
         })
-
     }
+
   }
 
   render() {
+    console.log(this.props)
 
     const detailsDataRender = this.state.detailsData;
     const Thumbnails = this.state.thumbnails.map((item, pos) => {

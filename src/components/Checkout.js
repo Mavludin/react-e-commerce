@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 import classes from '../modules/Checkout.module.css';
 import mutualClasses from '../modules/App.module.css';
-import mediaQueries from '../modules/Media.module.css';
 
 class Details extends React.Component {
 
@@ -19,7 +18,6 @@ class Details extends React.Component {
         localStorage.clear();
     }
 
-
     render() {
 
         let arrayOfValues = [];
@@ -30,12 +28,10 @@ class Details extends React.Component {
 
         }
 
-        console.log(arrayOfValues)
-
         const arrayOfProducts = arrayOfValues.map(item => {
 
                 return (
-                    <div onClick={()=>this.BackToDetails(item.id)} className={classes.Item}>
+                    <div onClick={()=>this.BackToDetails(item.id)} className={classes.Item} key={item.id}>
                         <img src={item.thumbnail} alt={item.name} />
                         <h4>{item.name}</h4>
                         <p>{`x${item.amount}`}</p>
@@ -48,8 +44,6 @@ class Details extends React.Component {
         const totalPrice = arrayOfValues.reduce((acc, item) => {
             return acc + (item.price*item.amount);
         }, 0);
-
-        console.log(totalPrice)
 
         return (
 
