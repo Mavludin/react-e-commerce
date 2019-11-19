@@ -9,7 +9,15 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 
+import setHeaderHeight from '../Utils/setHeaderHeight';
+
 class HomePage extends React.Component {
+
+    setMainTagMarginTop = () => {
+        const headerHeight = window.getComputedStyle(document.querySelector('header')).height;
+        const mainTag = document.querySelector('main');
+        mainTag.style.marginTop = headerHeight;
+    }
 
     state = {
         ProductData: [],
@@ -21,11 +29,14 @@ class HomePage extends React.Component {
             .then(response => {
                 console.log(response.data);
 
-                this.setState({ ProductData: response.data})
+                this.setState({ ProductData: response.data })
             })
             .catch(error => {
                 console.log(error);
             })
+
+        setHeaderHeight();
+        window.addEventListener('resize', setHeaderHeight());
 
     }
 

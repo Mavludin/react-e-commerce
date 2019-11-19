@@ -10,19 +10,6 @@ import Thank from './components/Thank';
 import classes from './modules/App.module.css';
 
 class App extends React.Component {
-  
-  setMainTagMarginTop = () => {
-      const headerHeight = window.getComputedStyle(document.querySelector('header')).height;
-      const mainTag = document.querySelector('main');
-      mainTag.style.marginTop = headerHeight;
-  }
-
-  componentDidMount() {
-
-    this.setMainTagMarginTop();
-    window.addEventListener('resize', this.setMainTagMarginTop)
-
-  }
 
   render() {
 

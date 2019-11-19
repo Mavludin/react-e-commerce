@@ -3,12 +3,19 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
+import setHeaderHeight from '../Utils/setHeaderHeight';
+
 import { Link } from 'react-router-dom';
 
 import classes from '../modules/Checkout.module.css';
 import mutualClasses from '../modules/App.module.css';
 
 class Details extends React.Component {
+
+    componentDidMount() {
+        setHeaderHeight();
+        window.addEventListener('resize', setHeaderHeight());
+    }
 
     BackToDetails = (id) => {
         window.open(`details/${id}`, "_self");
@@ -30,19 +37,19 @@ class Details extends React.Component {
 
         const arrayOfProducts = arrayOfValues.map(item => {
 
-                return (
-                    <div onClick={()=>this.BackToDetails(item.id)} className={classes.Item} key={item.id}>
-                        <img src={item.thumbnail} alt={item.name} />
-                        <h4>{item.name}</h4>
-                        <p>{`x${item.amount}`}</p>
-                        <p className={classes.Desc}>Amount: Rs {item.price}</p>
-                    </div>
-                )
+            return (
+                <div onClick={() => this.BackToDetails(item.id)} className={classes.Item} key={item.id}>
+                    <img src={item.thumbnail} alt={item.name} />
+                    <h4>{item.name}</h4>
+                    <p>{`x${item.amount}`}</p>
+                    <p className={classes.Desc}>Amount: Rs {item.price}</p>
+                </div>
+            )
 
         });
 
         const totalPrice = arrayOfValues.reduce((acc, item) => {
-            return acc + (item.price*item.amount);
+            return acc + (item.price * item.amount);
         }, 0);
 
         return (

@@ -22,12 +22,16 @@
     cursor: pointer;
     border: 2px solid transparent;
     border-radius: 5px;
-    transition: all 0.3s linear;
+	transition: transform 0.2s linear;
+	-webkit-transition: transform 0.2s linear;
+	-moz-transition: transform 0.2s linear;;
 }
 
 .SelectedThumbnail {
     border: 2px solid #007eff;
-    transform: scale(1.2);
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
 }
 
 .Details h1 {

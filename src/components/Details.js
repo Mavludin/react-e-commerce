@@ -5,11 +5,12 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 
+import setHeaderHeight from '../Utils/setHeaderHeight';
+
 import classes from '../modules/Details.module.css';
 import mutualClasses from '../modules/App.module.css';
 
 class Details extends React.Component {
-
 
   state = {
     detailsData: {},
@@ -48,7 +49,7 @@ class Details extends React.Component {
   }
 
   selectCurrentThumbnail = (pos) => {
-    this.setState({previewImage: this.state.detailsData.photos[pos], thumbnailPos: pos})
+    this.setState({ previewImage: this.state.detailsData.photos[pos], thumbnailPos: pos })
   }
 
   componentDidMount() {
@@ -60,20 +61,22 @@ class Details extends React.Component {
         .then(response => {
           this.setState(
             {
-              detailsData: response.data, 
-              thumbnails: response.data.photos, 
+              detailsData: response.data,
+              thumbnails: response.data.photos,
               previewImage: response.data.photos[0]
-           })
+            })
         })
         .catch(error => {
           console.log(error)
         })
     }
 
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight());
+
   }
 
   render() {
-    console.log(this.props)
 
     const detailsDataRender = this.state.detailsData;
     const Thumbnails = this.state.thumbnails.map((item, pos) => {
@@ -85,7 +88,7 @@ class Details extends React.Component {
       }
 
       return (
-        <img onClick={()=>this.selectCurrentThumbnail(pos)} className={ClassesArr.join(' ')} src={item} alt="Thumbnail" key={pos} />
+        <img onClick={() => this.selectCurrentThumbnail(pos)} className={ClassesArr.join(' ')} src={item} alt="Thumbnail" key={pos} />
       )
 
     });
@@ -112,7 +115,7 @@ class Details extends React.Component {
               <h3>Description</h3>
               <p className={classes.Desc}>{detailsDataRender.description}</p>
               <h3>Preview</h3>
-              <div className={classes.Thumbnails}>
+              <div>
                 {Thumbnails}
               </div>
               <button onClick={this.onAddtoCartClick}>Add to Cart</button>

@@ -3,10 +3,17 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
+import setHeaderHeight from '../Utils/setHeaderHeight';
+
 import classes from '../modules/Thank.module.css';
 import mutualClasses from '../modules/App.module.css';
 
 class Details extends React.Component {
+
+    componentDidMount() {
+        setHeaderHeight();
+        window.addEventListener('resize', setHeaderHeight());
+    }
 
     render() {
 
