@@ -79,8 +79,8 @@ class Header extends React.Component {
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                            <li><a href="#clothes-heading">Clothing</a></li>
-                            <li><a href="#accessories-heading">Accessories</a></li>
+                            <li><a href="/#">Clothing</a></li>
+                            <li><a href="/#">Accessories</a></li>
                             </ul>
                         </nav>
 
@@ -102,8 +102,8 @@ class Header extends React.Component {
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                                <li><a href="#clothes-heading">Clothing</a></li>
-                                <li><a href="#accessories-heading">Accessories</a></li>
+                                <li><a href="/#">Clothing</a></li>
+                                <li><a href="/#">Accessories</a></li>
                             </ul>
                         </nav>
 

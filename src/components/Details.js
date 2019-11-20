@@ -17,7 +17,9 @@ class Details extends React.Component {
     thumbnails: [],
     amountOfEachProduct: 0,
     previewImage: '',
-    thumbnailPos: 0
+    thumbnailPos: 0,
+    showInitialThumbnails: true,
+    showHiddenThumbnails: false
   }
 
   onAddtoCartClick = () => {
@@ -34,7 +36,7 @@ class Details extends React.Component {
     if (!localStorage[`product_${this.props.match.params.productId}`]) AmountOfEachProduct = 0;
     else AmountOfEachProduct = JSON.parse(localStorage[`product_${this.props.match.params.productId}`]).amount;
     AmountOfEachProduct++;
-    this.setState({ amountOfEachProduct: AmountOfEachProduct });
+    this.setState({ amountOfEachProduct: AmountOfEachProduct, showPreLoader: true });
 
     const obj = {
       'id': this.state.detailsData.id,
@@ -69,10 +71,25 @@ class Details extends React.Component {
         .catch(error => {
           console.log(error)
         })
+
     }
 
     setHeaderHeight();
     window.addEventListener('resize', setHeaderHeight());
+
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      this.setState({showHiddenThumbnails: true, showInitialThumbnails: false})
+    } else {
+      this.setState({showHiddenThumbnails: false, showInitialThumbnails: true})
+    }
+
+    window.addEventListener('resize', ()=> {
+      if (window.matchMedia("(max-width: 600px)").matches) {
+        this.setState({showHiddenThumbnails: true, showInitialThumbnails: false})
+      } else {
+        this.setState({showHiddenThumbnails: false, showInitialThumbnails: true})
+      }
+    })
 
   }
 
@@ -93,6 +110,8 @@ class Details extends React.Component {
 
     });
 
+    const HiddentThumbnails = <div>{Thumbnails}</div>;
+
     return (
 
       <div>
@@ -108,6 +127,7 @@ class Details extends React.Component {
 
             <div className={classes.Right}>
               <h1>{detailsDataRender.name}</h1>
+              {this.state.showHiddenThumbnails ? HiddentThumbnails : null}
               <p className={classes.Brand}>{detailsDataRender.brand}</p>
               <p className={classes.Price}>
                 Price: Rs <span>{detailsDataRender.price}</span>
@@ -116,7 +136,7 @@ class Details extends React.Component {
               <p className={classes.Desc}>{detailsDataRender.description}</p>
               <h3>Preview</h3>
               <div>
-                {Thumbnails}
+                {this.state.showInitialThumbnails ? Thumbnails : null}
               </div>
               <button onClick={this.onAddtoCartClick}>Add to Cart</button>
             </div>
