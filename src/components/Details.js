@@ -18,8 +18,7 @@ class Details extends React.Component {
     amountOfEachProduct: 0,
     previewImage: '',
     thumbnailPos: 0,
-    showInitialThumbnails: true,
-    showHiddenThumbnails: false
+    ShowThumbnails: true
   }
 
   onAddtoCartClick = () => {
@@ -78,16 +77,16 @@ class Details extends React.Component {
     window.addEventListener('resize', setHeaderHeight());
 
     if (window.matchMedia("(max-width: 600px)").matches) {
-      this.setState({showHiddenThumbnails: true, showInitialThumbnails: false})
+      this.setState({ShowThumbnails: false})
     } else {
-      this.setState({showHiddenThumbnails: false, showInitialThumbnails: true})
+      this.setState({ShowThumbnails: true})
     }
 
     window.addEventListener('resize', ()=> {
       if (window.matchMedia("(max-width: 600px)").matches) {
-        this.setState({showHiddenThumbnails: true, showInitialThumbnails: false})
+        this.setState({ShowThumbnails: false})
       } else {
-        this.setState({showHiddenThumbnails: false, showInitialThumbnails: true})
+        this.setState({ShowThumbnails: true})
       }
     })
 
@@ -110,7 +109,7 @@ class Details extends React.Component {
 
     });
 
-    const HiddentThumbnails = <div>{Thumbnails}</div>;
+    const ShowThumbnails = <div><h3>Preview</h3>{Thumbnails}</div>;
 
     return (
 
@@ -127,16 +126,15 @@ class Details extends React.Component {
 
             <div className={classes.Right}>
               <h1>{detailsDataRender.name}</h1>
-              {this.state.showHiddenThumbnails ? HiddentThumbnails : null}
+              {!this.state.ShowThumbnails ? ShowThumbnails : null}
               <p className={classes.Brand}>{detailsDataRender.brand}</p>
               <p className={classes.Price}>
                 Price: Rs <span>{detailsDataRender.price}</span>
               </p>
               <h3>Description</h3>
               <p className={classes.Desc}>{detailsDataRender.description}</p>
-              <h3>Preview</h3>
               <div>
-                {this.state.showInitialThumbnails ? Thumbnails : null}
+                {this.state.ShowThumbnails ? ShowThumbnails : null}
               </div>
               <button onClick={this.onAddtoCartClick}>Add to Cart</button>
             </div>

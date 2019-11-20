@@ -12,7 +12,6 @@ class Header extends React.Component {
     state = {
         hiddenMenuClasses : [classes.HiddenMenu],
         boxShadow: 'none'
-
     }
 
     showHiddenMenu = () => {
@@ -37,6 +36,9 @@ class Header extends React.Component {
     
     componentDidMount() {
         window.addEventListener('scroll', this.listenScrollEvent);
+        document.body.onclick = () => {
+            this.closeHiddenMenu();
+        }
     }
 
     render() {
