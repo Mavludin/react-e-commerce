@@ -45,7 +45,7 @@ class Header extends React.Component {
 
         let CounterClass = "";
 
-        if (localStorage.getItem('amountOfProducts')) {
+        if (this.props.amountOfProducts > 0) {
             CounterClass = classes.Counter;
         }
 
@@ -66,7 +66,7 @@ class Header extends React.Component {
                         <Link to='/checkout'>
                             <i className="fas fa-cart-arrow-down" >
                                 <span className={CounterClass}>
-                                    {localStorage.getItem('amountOfProducts')}
+                                    {this.props.amountOfProducts}
                                 </span></i>
                         </Link>
 
@@ -123,8 +123,9 @@ class Header extends React.Component {
                             <Link to='/checkout'>
                                 <i className="fas fa-cart-arrow-down" >
                                     <span className={CounterClass}>
-                                        {localStorage.getItem('amountOfProducts')}
-                                    </span></i>
+                                        {this.props.amountOfProducts}
+                                    </span>
+                                </i>
                             </Link>
 
                             <img className={classes.Avatar} src={avatar} alt="Avatar" />

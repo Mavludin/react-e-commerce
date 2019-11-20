@@ -6,11 +6,6 @@ import mutualClasses from '../modules/App.module.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Header from './Header';
-import Footer from './Footer';
-
-import setHeaderHeight from '../Utils/setHeaderHeight';
-
 class HomePage extends React.Component {
 
     setMainTagMarginTop = () => {
@@ -34,9 +29,6 @@ class HomePage extends React.Component {
             .catch(error => {
                 console.log(error);
             })
-
-        setHeaderHeight();
-        window.addEventListener('resize', setHeaderHeight());
 
     }
 
@@ -81,38 +73,29 @@ class HomePage extends React.Component {
         });
 
         return (
-            <div className="App">
+            <main >
 
-                <Header />
+                <div className={mutualClasses.Container}>
 
-                <main >
+                    <div className={classes.Products}>
 
-                    <div className={mutualClasses.Container}>
+                        <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
-                        <div className={classes.Products}>
+                        <div className={classes.Clothes}>
+                            {clothesDataRender}
+                        </div>
 
-                            <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
+                        <h2 className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
 
-                            <div className={classes.Clothes}>
-                                {clothesDataRender}
-                            </div>
-
-                            <h2 className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
-
-                            <div className={classes.Accessories}>
-                                {AccessoriesDataRender}
-                            </div>
-
+                        <div className={classes.Accessories}>
+                            {AccessoriesDataRender}
                         </div>
 
                     </div>
 
-                </main>
+                </div>
 
-                <Footer />
-
-            </div>
-
+            </main>
         )
     }
 }

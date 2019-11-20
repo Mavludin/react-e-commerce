@@ -6,6 +6,10 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+main {
+	margin-top: 90px;
+}
+
 h1, h2 {
 	color: #007eff;
 	font-size: 2em;
@@ -35,6 +39,10 @@ a {
 }
 
 @media screen and (max-width: 900px) {
+
+	main {
+		margin-top: 100px;
+	}
 
 	.Container {
 		padding: 10px;
@@ -66,6 +74,10 @@ a {
 
 	header .Container{
 		padding: 5px 0;
+	}
+
+	main {
+		margin-top: 60px;
 	}
 }
 

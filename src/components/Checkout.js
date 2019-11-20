@@ -1,21 +1,11 @@
 import React from 'react';
 
-import Header from './Header';
-import Footer from './Footer';
-
-import setHeaderHeight from '../Utils/setHeaderHeight';
-
 import { Link } from 'react-router-dom';
 
 import classes from '../modules/Checkout.module.css';
 import mutualClasses from '../modules/App.module.css';
 
 class Details extends React.Component {
-
-    componentDidMount() {
-        setHeaderHeight();
-        window.addEventListener('resize', setHeaderHeight());
-    }
 
     BackToDetails = (id) => {
         window.open(`details/${id}`, "_self");
@@ -53,35 +43,27 @@ class Details extends React.Component {
         }, 0);
 
         return (
+            <main>
+                <div className={[mutualClasses.Container, classes.Checkout].join(' ')} >
+                    <h1>Checkout</h1>
+                    <p className={classes.TotalItems}>Total items: {localStorage['amountOfProducts']}</p>
+                    <div className={classes.KindaBlock}>
 
-            <div className="App" >
-                <Header />
-
-                <main>
-                    <div className={[mutualClasses.Container, classes.Checkout].join(' ')} >
-                        <h1>Checkout</h1>
-                        <p className={classes.TotalItems}>Total items: {localStorage['amountOfProducts']}</p>
-                        <div className={classes.KindaBlock}>
-
-                            <div className={classes.LeftCheck}>
-                                {arrayOfProducts}
-                            </div>
-
-                            <div className={classes.RightCheck}>
-                                <div className={classes.Total}>
-                                    <h2>Total amount</h2>
-                                    <p className={classes.Desc}>Total price: <span>{totalPrice}</span></p>
-                                    <Link to="/thank"><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
-                                </div>
-                            </div>
-
+                        <div className={classes.LeftCheck}>
+                            {arrayOfProducts}
                         </div>
+
+                        <div className={classes.RightCheck}>
+                            <div className={classes.Total}>
+                                <h2>Total amount</h2>
+                                <p className={classes.Desc}>Total price: <span>{totalPrice}</span></p>
+                                <Link to="/thank"><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
+                            </div>
+                        </div>
+
                     </div>
-                </main>
-
-                <Footer />
-
-            </div>
+                </div>
+            </main>
         );
     }
 }
