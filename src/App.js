@@ -13,18 +13,12 @@ import classes from './modules/App.module.css';
 
 class App extends React.Component {
 
-  state = {
-    topCounter: localStorage.getItem('amountOfProducts')
-  }
-
   render() {
-
-    console.log(this.state.topCounter);
 
     return (
       <BrowserRouter>
         <div className="App">
-          <Header amountOfProducts={this.state.topCounter} />
+          <Header />
           <div>
               <Switch>
                 <Route path="/thank" component={Thank} />

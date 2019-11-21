@@ -33,19 +33,12 @@ class Header extends React.Component {
           this.setState({boxShadow: 'none'})
         }
     }
-    
-    componentDidMount() {
-        window.addEventListener('scroll', this.listenScrollEvent);
-        document.body.onclick = () => {
-            this.closeHiddenMenu();
-        }
-    }
 
     render() {
 
         let CounterClass = "";
 
-        if (this.props.amountOfProducts > 0) {
+        if (localStorage[('amountOfProducts')] > 0) {
             CounterClass = classes.Counter;
         }
 
@@ -77,12 +70,12 @@ class Header extends React.Component {
                     <div className={this.state.hiddenMenuClasses}>
 
                         <div className={classes.Logo}>
-                            <a href="/">Shop<span>Lane</span></a>
+                            <Link to="/">Shop<span>Lane</span></Link>
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                            <li><a href="/#">Clothing</a></li>
-                            <li><a href="/#">Accessories</a></li>
+                            <li><Link to="/">Clothing</Link></li>
+                            <li><Link to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -100,12 +93,12 @@ class Header extends React.Component {
                     <div className={classes.HeaderLeft}>
 
                         <div className={classes.Logo}>
-                            <a href="/">Shop<span>Lane</span></a>
+                            <Link to="/">Shop<span>Lane</span></Link>
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                                <li><a href="/#">Clothing</a></li>
-                                <li><a href="/#">Accessories</a></li>
+                                <li><Link to="/">Clothing</Link></li>
+                                <li><Link to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -123,7 +116,7 @@ class Header extends React.Component {
                             <Link to='/checkout'>
                                 <i className="fas fa-cart-arrow-down" >
                                     <span className={CounterClass}>
-                                        {this.props.amountOfProducts}
+                                        {localStorage[('amountOfProducts')]}
                                     </span>
                                 </i>
                             </Link>

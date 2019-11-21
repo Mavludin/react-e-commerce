@@ -10,7 +10,6 @@ class Details extends React.Component {
   state = {
     detailsData: {},
     thumbnails: [],
-    amountOfEachProduct: 0,
     previewImage: '',
     thumbnailPos: 0,
     ShowThumbnails: true
@@ -30,7 +29,6 @@ class Details extends React.Component {
     if (!localStorage[`product_${this.props.match.params.productId}`]) AmountOfEachProduct = 0;
     else AmountOfEachProduct = JSON.parse(localStorage[`product_${this.props.match.params.productId}`]).amount;
     AmountOfEachProduct++;
-    this.setState({ amountOfEachProduct: AmountOfEachProduct});
 
     const obj = {
       'id': this.state.detailsData.id,

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+
 import classes from "../modules/Footer.module.css";
 import mutualClasses from "../modules/App.module.css";
 
@@ -12,38 +14,38 @@ const Footer = () => {
         <div>
           <h3>Online store</h3>
           <ul>
-            <li><a href="/#">Men clothing</a></li>
-            <li><a href="/#">Women clothing</a></li>
-            <li><a href="/#">Men accessories</a></li>
-            <li><a href="/#">Women accessories</a></li>
+            <li><Link to="/">Men clothing</Link></li>
+            <li><Link to="/">Women clothing</Link></li>
+            <li><Link to="/">Men accessories</Link></li>
+            <li><Link to="/">Women accessories</Link></li>
           </ul>
         </div>
 
         <div>
           <h3>Online store</h3>
           <ul>
-            <li><a href="/#">Home</a></li>
-            <li><a href="/#">About</a></li>
-            <li><a href="/#">Contact</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">About</Link></li>
+            <li><Link to="/">Contact</Link></li>
           </ul>
         </div>
         <div>
           <h3>Partners</h3>
           <ul>
-            <li><a href="/#">Zara</a></li>
-            <li><a href="/#">Pantaloons</a></li>
-            <li><a href="/#">Levis</a></li>
-            <li><a href="/#">Ucb</a></li>
-            <li><a href="/#">+ Many more</a></li>
+            <li><Link to="/">Zara</Link></li>
+            <li><Link to="/">Pantaloons</Link></li>
+            <li><Link to="/">Levis</Link></li>
+            <li><Link to="/">Ucb</Link></li>
+            <li><Link to="/">+ Many more</Link></li>
           </ul>
         </div>
         <div>
           <h3>Address</h3>
           <ul>
-            <li><a href="/#">Building 101</a></li>
-            <li><a href="/#">Central Avenue</a></li>
-            <li><a href="/#">LA - 902722</a></li>
-            <li><a href="/#">United States</a></li>
+            <li><Link to="/">Building 101</Link></li>
+            <li><Link to="/">Central Avenue</Link></li>
+            <li><Link to="/">LA - 902722</Link></li>
+            <li><Link to="/">United States</Link></li>
           </ul>
         </div>
 
