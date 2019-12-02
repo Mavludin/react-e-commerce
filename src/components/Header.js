@@ -59,7 +59,7 @@ class Header extends React.Component {
                         <Link to='/checkout'>
                             <i className="fas fa-cart-arrow-down" >
                                 <span className={CounterClass}>
-                                    {this.props.amountOfProducts}
+                                    {this.props.amountOfProducts > 0 ? this.props.amountOfProducts : localStorage[('amountOfProducts')]}
                                 </span></i>
                         </Link>
 
@@ -116,7 +116,7 @@ class Header extends React.Component {
                             <Link to='/checkout'>
                                 <i className="fas fa-cart-arrow-down" >
                                     <span className={CounterClass}>
-                                        {localStorage[('amountOfProducts')]}
+                                        {this.props.amountOfProducts > 0 ? this.props.amountOfProducts : localStorage[('amountOfProducts')]}
                                     </span>
                                 </i>
                             </Link>

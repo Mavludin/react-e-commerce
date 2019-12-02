@@ -23,6 +23,7 @@ class Details extends React.Component {
       AmountOfProducts = localStorage['amountOfProducts'];
     }
     AmountOfProducts++;
+    this.props.updateCartCount(AmountOfProducts);
     localStorage.setItem('amountOfProducts', AmountOfProducts);
 
     let AmountOfEachProduct;
