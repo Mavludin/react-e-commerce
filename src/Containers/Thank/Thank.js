@@ -1,16 +1,17 @@
 import React from 'react';
 
-import classes from '../modules/Thank.module.css';
-import mutualClasses from '../modules/App.module.css';
+import classes from './Thank.module.css';
+import mutualClasses from '../../App.module.css';
 
 class Details extends React.Component {
 
     render() {
 
         return (
+
             <main>
                 <div className={[mutualClasses.Container, classes.Thank].join(' ')} >
-                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                    <i className="fas fa-check-circle" aria-hidden="true"></i>
                     <h1>Order Placed Successfully!!!</h1>
                     <p className={classes.Desc}>We have sent you an email with the order details</p>
                 </div>

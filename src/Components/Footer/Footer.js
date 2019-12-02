@@ -2,8 +2,8 @@ import React from "react";
 
 import { Link } from 'react-router-dom';
 
-import classes from "../modules/Footer.module.css";
-import mutualClasses from "../modules/App.module.css";
+import classes from "./Footer.module.css";
+import mutualClasses from "../../App.module.css";
 
 const Footer = () => {
   return (

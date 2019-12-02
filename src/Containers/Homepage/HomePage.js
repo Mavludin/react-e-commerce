@@ -1,10 +1,11 @@
 import React from 'react';
 
-import classes from '../modules/HomePage.module.css';
-import mutualClasses from '../modules/App.module.css';
+import classes from './HomePage.module.css';
+import mutualClasses from '../../App.module.css';
 
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { getProductDataForHomePage } from '../../Utils/APIController';
+import Preloader from '../../Components/Preloader/Preloader';
 
 class HomePage extends React.Component {
 
@@ -16,15 +17,15 @@ class HomePage extends React.Component {
 
     state = {
         ProductData: [],
-        amountOfProducts: 0
+        amountOfProducts: 0,
+        showLoader: true
     }
 
     componentDidMount() {
-        axios.get('https://5d76bf96515d1a0014085cf9.mockapi.io/product')
+        getProductDataForHomePage()
             .then(response => {
-                console.log(response.data);
-
-                this.setState({ ProductData: response.data })
+                console.log(response)
+                this.setState({ ProductData: response, showLoader: false })
             })
             .catch(error => {
                 console.log(error);
@@ -73,29 +74,35 @@ class HomePage extends React.Component {
         });
 
         return (
-            <main >
 
-                <div className={mutualClasses.Container}>
+            <main>
+                
+                <Preloader visible={this.state.showLoader} > 
+                
+                    <div className={mutualClasses.Container}>
 
-                    <div className={classes.Products}>
+                        <div className={classes.Products}>
 
-                        <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
+                            <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
-                        <div className={classes.Clothes}>
-                            {clothesDataRender}
-                        </div>
+                            <div className={classes.Clothes}>
+                                {clothesDataRender}
+                            </div>
 
-                        <h2 className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
+                            <h2 className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
 
-                        <div className={classes.Accessories}>
-                            {AccessoriesDataRender}
+                            <div className={classes.Accessories}>
+                                {AccessoriesDataRender}
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
+                </Preloader>
 
             </main>
+
         )
     }
 }

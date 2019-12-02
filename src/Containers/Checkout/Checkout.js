@@ -2,20 +2,24 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import classes from '../modules/Checkout.module.css';
-import mutualClasses from '../modules/App.module.css';
+import classes from './Checkout.module.css';
+import mutualClasses from '../../App.module.css';
+import { Endpoints } from '../../Utils/RouterEndpoints';
 
 class Details extends React.Component {
 
     BackToDetails = (id) => {
-        window.open(`details/${id}`, "_self");
+        window.open(`${Endpoints.DETAILS}${id}`, "_self");
     }
 
     OnPlaceOrder = () => {
         localStorage.clear();
+        this.props.updateCartCount(0);
     }
 
     render() {
+
+        console.log(this.props);
 
         let arrayOfValues = [];
         for (let i in localStorage) {
@@ -57,7 +61,7 @@ class Details extends React.Component {
                             <div className={classes.Total}>
                                 <h2>Total amount</h2>
                                 <p className={classes.Desc}>Total price: <span>{totalPrice}</span></p>
-                                <Link to="/thank"><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
+                                <Link to={Endpoints.THANK}><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
                             </div>
                         </div>
 

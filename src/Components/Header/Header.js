@@ -1,11 +1,11 @@
 import React from 'react';
 
-import classes from '../modules/Header.module.css';
-import mutualClasses from '../modules/App.module.css';
+import classes from './Header.module.css';
+import mutualClasses from "../../App.module.css";
 
 import { Link } from 'react-router-dom';
 
-import avatar from '../img/avatar.jpg';
+import avatar from '../../img/avatar.jpg';
 
 class Header extends React.Component {
 
@@ -33,7 +33,7 @@ class Header extends React.Component {
           this.setState({boxShadow: 'none'})
         }
     }
-
+    
     render() {
 
         let CounterClass = "";

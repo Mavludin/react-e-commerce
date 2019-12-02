@@ -1,9 +1,10 @@
 import React from 'react';
 
-import axios from 'axios';
+import classes from './Details.module.css';
+import mutualClasses from '../../App.module.css';
 
-import classes from '../modules/Details.module.css';
-import mutualClasses from '../modules/App.module.css';
+import { getDetailsData } from '../../Utils/APIController';
+import Preloader from '../../Components/Preloader/Preloader';
 
 class Details extends React.Component {
 
@@ -12,7 +13,8 @@ class Details extends React.Component {
     thumbnails: [],
     previewImage: '',
     thumbnailPos: 0,
-    ShowThumbnails: true
+    ShowThumbnails: true,
+    showPreLoader: true
   }
 
   onAddtoCartClick = () => {
@@ -52,13 +54,14 @@ class Details extends React.Component {
 
     if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
 
-      axios.get(`https://5d76bf96515d1a0014085cf9.mockapi.io/product/${productId}`)
+      getDetailsData(productId)
         .then(response => {
           this.setState(
             {
-              detailsData: response.data,
-              thumbnails: response.data.photos,
-              previewImage: response.data.photos[0]
+              detailsData: response,
+              thumbnails: response.photos,
+              previewImage: response.photos[0],
+              showPreLoader: false
             })
         })
         .catch(error => {
@@ -109,28 +112,34 @@ class Details extends React.Component {
     return (
 
       <main>
-        <div className={[mutualClasses.Container, classes.Details].join(' ')} >
 
-          <div className={classes.Left}>
-            <img src={this.state.previewImage} alt={detailsDataRender.name} />
-          </div>
+          <Preloader visible={this.state.showPreLoader} > 
+          
+            <div className={[mutualClasses.Container, classes.Details].join(' ')} >
 
-          <div className={classes.Right}>
-            <h1>{detailsDataRender.name}</h1>
-            {!this.state.ShowThumbnails ? ShowThumbnails : null}
-            <p className={classes.Brand}>{detailsDataRender.brand}</p>
-            <p className={classes.Price}>
-              Price: Rs <span>{detailsDataRender.price}</span>
-            </p>
-            <h3>Description</h3>
-            <p className={classes.Desc}>{detailsDataRender.description}</p>
-            <div>
-              {this.state.ShowThumbnails ? ShowThumbnails : null}
+              <div className={classes.Left}>
+                <img src={this.state.previewImage} alt={detailsDataRender.name} />
+              </div>
+
+              <div className={classes.Right}>
+                <h1>{detailsDataRender.name}</h1>
+                {!this.state.ShowThumbnails ? ShowThumbnails : null}
+                <p className={classes.Brand}>{detailsDataRender.brand}</p>
+                <p className={classes.Price}>
+                  Price: Rs <span>{detailsDataRender.price}</span>
+                </p>
+                <h3>Description</h3>
+                <p className={classes.Desc}>{detailsDataRender.description}</p>
+                <div>
+                  {this.state.ShowThumbnails ? ShowThumbnails : null}
+                </div>
+                <button onClick={this.onAddtoCartClick}>Add to Cart</button>
+              </div>
+
             </div>
-            <button onClick={this.onAddtoCartClick}>Add to Cart</button>
-          </div>
 
-        </div>
+          </Preloader>
+
       </main>
 
     );

@@ -2,14 +2,16 @@ import React from 'react';
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
-import Header from './components/Header';
-import HomePage from './components/HomePage';
-import Details from './components/Details';
-import Checkout from './components/Checkout';
-import Thank from './components/Thank';
-import Footer from './components/Footer';
+import Header from './Components/Header/Header';
+import HomePage from './Containers/Homepage/HomePage';
+import Details from './Containers/Details/Details';
+import Checkout from './Containers/Checkout/Checkout';
+import Thank from './Containers/Thank/Thank';
+import Footer from './Components/Footer/Footer';
 
-import classes from './modules/App.module.css';
+import classes from './App.module.css';
+
+import {Endpoints} from './Utils/RouterEndpoints';
 
 class App extends React.Component {
 
@@ -18,18 +20,8 @@ class App extends React.Component {
   }
 
   updateCartCount = (count) => {
-    console.log('count=>', count);
-    this.setState({cartCount: count})
+    this.setState({cartCount: count});
   }
-
-  constructor(props) {
-    super(props)
-    this.myRef = React.createRef()  
-}
-
-
-scrollToMyRef = () => window.scrollTo(0, this.myRef.current.offsetTop)   
-// run this method to execute scrolling. 
 
   render() {
 
@@ -39,15 +31,15 @@ scrollToMyRef = () => window.scrollTo(0, this.myRef.current.offsetTop)
           <Header amountOfProducts={this.state.cartCount} />
           <div>
               <Switch>
-                <Route path="/thank" component={Thank} />
-                <Route path="/details/:productId" render={(props) => <Details {...props} updateCartCount={this.updateCartCount} />}/>
-                <Route path="/checkout" component={Checkout} />
-                <Route path="/" component={HomePage} />
+                <Route path={`${Endpoints.THANK}`} component={Thank} />
+                <Route path={`${Endpoints.DETAILS}:productId`} render={(props) => <Details {...props} updateCartCount={this.updateCartCount} />}/>
+                <Route path={Endpoints.CHECKOUT} render={(props) => <Checkout {...props} updateCartCount={this.updateCartCount} />} />
+                <Route path={Endpoints.HOMEPAGE} component={HomePage} />
               </Switch>
           </div>
           <Footer />
 
-          <img className={classes.EdyodaLogo} ref={this.myRef} src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo"></img>
+          <img className={classes.EdyodaLogo} src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo"></img>
         </div>
       </BrowserRouter>
     );
