@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
@@ -6,7 +7,7 @@ import classes from './Checkout.module.css';
 import mutualClasses from '../../App.module.css';
 import { Endpoints } from '../../Utils/RouterEndpoints';
 
-class Details extends React.Component {
+class Checkout extends React.Component {
 
     BackToDetails = (id) => {
         window.open(`${Endpoints.DETAILS}${id}`, "_self");
@@ -14,12 +15,10 @@ class Details extends React.Component {
 
     OnPlaceOrder = () => {
         localStorage.clear();
-        this.props.updateCartCount(0);
+        this.props.onOrderPlaced();
     }
 
     render() {
-
-        console.log(this.props);
 
         let arrayOfValues = [];
         for (let i in localStorage) {
@@ -72,4 +71,10 @@ class Details extends React.Component {
     }
 }
 
-export default Details;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      onOrderPlaced: () => {dispatch({type:'ORDER_PLACED'})}
+    }
+  }
+  
+  export default connect(null, mapDispatchToProps)(Checkout);

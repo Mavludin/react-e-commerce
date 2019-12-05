@@ -15,25 +15,25 @@ import {Endpoints} from './Utils/RouterEndpoints';
 
 class App extends React.Component {
 
-  state = {
-    cartCount : 0
-  }
+  // state = {
+  //   cartCount : 0
+  // }
 
-  updateCartCount = (count) => {
-    this.setState({cartCount: count});
-  }
+  // updateCartCount = (count) => {
+  //   this.setState({cartCount: count});
+  // }
 
   render() {
 
     return (
       <BrowserRouter>
         <div className="App">
-          <Header amountOfProducts={this.state.cartCount} />
+          <Header />
           <div>
               <Switch>
                 <Route path={`${Endpoints.THANK}`} component={Thank} />
-                <Route path={`${Endpoints.DETAILS}:productId`} render={(props) => <Details {...props} updateCartCount={this.updateCartCount} />}/>
-                <Route path={Endpoints.CHECKOUT} render={(props) => <Checkout {...props} updateCartCount={this.updateCartCount} />} />
+                <Route path={`${Endpoints.DETAILS}:productId`} component={Details} />
+                <Route path={Endpoints.CHECKOUT} component={Checkout} />
                 <Route path={Endpoints.HOMEPAGE} component={HomePage} />
               </Switch>
           </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import classes from './Header.module.css';
 import mutualClasses from "../../App.module.css";
@@ -59,7 +60,7 @@ class Header extends React.Component {
                         <Link to='/checkout'>
                             <i className="fas fa-cart-arrow-down" >
                                 <span className={CounterClass}>
-                                    {this.props.amountOfProducts > 0 ? this.props.amountOfProducts : localStorage[('amountOfProducts')]}
+                                    {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
                                 </span></i>
                         </Link>
 
@@ -116,7 +117,7 @@ class Header extends React.Component {
                             <Link to='/checkout'>
                                 <i className="fas fa-cart-arrow-down" >
                                     <span className={CounterClass}>
-                                        {this.props.amountOfProducts > 0 ? this.props.amountOfProducts : localStorage[('amountOfProducts')]}
+                                        {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
                                     </span>
                                 </i>
                             </Link>
@@ -135,4 +136,10 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+const mapGlobalStateToProps = (globalState) => {
+    return {
+        totCount: globalState.totalCount
+    }
+}
+
+export default connect(mapGlobalStateToProps)(Header);

@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import classes from './Details.module.css';
 import mutualClasses from '../../App.module.css';
@@ -25,7 +26,7 @@ class Details extends React.Component {
       AmountOfProducts = localStorage['amountOfProducts'];
     }
     AmountOfProducts++;
-    this.props.updateCartCount(AmountOfProducts);
+    this.props.onIncrementAmountOfProducts();
     localStorage.setItem('amountOfProducts', AmountOfProducts);
 
     let AmountOfEachProduct;
@@ -146,4 +147,10 @@ class Details extends React.Component {
   }
 }
 
-export default Details;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIncrementAmountOfProducts: () => {dispatch({type:'INCREMENT_BY_ONE'})}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Details);
