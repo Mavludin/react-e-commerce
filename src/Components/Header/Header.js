@@ -10,6 +10,8 @@ import avatar from '../../img/avatar.jpg';
 
 class Header extends React.Component {
 
+    Overlay = React.createRef();
+
     state = {
         hiddenMenuClasses : [classes.HiddenMenu],
         boxShadow: 'none'
@@ -18,13 +20,15 @@ class Header extends React.Component {
     showHiddenMenu = () => {
         let updatedClasses = this.state.hiddenMenuClasses;
         updatedClasses = [classes.HiddenMenu, classes.ShowHiddenMenu].join(' ')
-        this.setState({hiddenMenuClasses: updatedClasses})
+        this.setState({hiddenMenuClasses: updatedClasses});
+        this.Overlay.current.style.display = 'block';
     }
 
     closeHiddenMenu = () => {
         let updatedClasses = this.state.hiddenMenuClasses;
         updatedClasses = [classes.HiddenMenu];
-        this.setState({hiddenMenuClasses: updatedClasses})
+        this.setState({hiddenMenuClasses: updatedClasses});
+        this.Overlay.current.style.display = 'none';
     }
 
     listenScrollEvent = e => {
@@ -71,12 +75,12 @@ class Header extends React.Component {
                     <div className={this.state.hiddenMenuClasses}>
 
                         <div className={classes.Logo}>
-                            <Link to="/">Shop<span>Lane</span></Link>
+                            <Link onClick={this.closeHiddenMenu} to="/">Shop<span>Lane</span></Link>
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                            <li><Link to="/">Clothing</Link></li>
-                            <li><Link to="/">Accessories</Link></li>
+                            <li><Link onClick={this.closeHiddenMenu} to="/">Clothing</Link></li>
+                            <li><Link onClick={this.closeHiddenMenu} to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -128,6 +132,8 @@ class Header extends React.Component {
                     </div>
 
                 </div>
+
+                <div ref={this.Overlay} onClick={this.closeHiddenMenu} className={classes.Overlay}></div>
 
             </header>
          

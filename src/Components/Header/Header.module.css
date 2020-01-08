@@ -45,6 +45,7 @@ header {
 	position: absolute;
 	left: 0;
 	top: 0;
+	z-index: 100;
 	background-color: white;
 	text-align: center;
 	padding: 40px 10px;
@@ -173,6 +174,17 @@ input:focus::placeholder {
 	width: 40px;
 	border-radius: 50%;
 	border: 3px solid #ccc;
+}
+
+.Overlay {
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left:0;
+	z-index: 90;
+	background-color: transparent;
 }
 
 @media screen and (max-width: 900px) {

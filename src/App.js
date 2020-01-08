@@ -15,14 +15,6 @@ import {Endpoints} from './Utils/RouterEndpoints';
 
 class App extends React.Component {
 
-  // state = {
-  //   cartCount : 0
-  // }
-
-  // updateCartCount = (count) => {
-  //   this.setState({cartCount: count});
-  // }
-
   render() {
 
     return (
