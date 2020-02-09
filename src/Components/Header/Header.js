@@ -8,6 +8,10 @@ import { Link } from 'react-router-dom';
 
 import avatar from '../../img/avatar.jpg';
 
+import Scroll from 'react-scroll';
+
+import { withRouter } from 'react-router-dom';
+
 class Header extends React.Component {
 
     Overlay = React.createRef();
@@ -37,6 +41,20 @@ class Header extends React.Component {
         } else {
           this.setState({boxShadow: 'none'})
         }
+    }
+
+    scrollToClothing = () => {
+        if (this.props.location.pathname !== "/" ) {
+            this.props.history.push('/');
+            setTimeout(()=>Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop-90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop-90));
+    }
+
+    scrollToAccessories = () => {
+        if (this.props.location.pathname !== "/" ) {
+            this.props.history.push('/');
+            setTimeout(()=>Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop-90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop-90));
     }
     
     render() {
@@ -79,8 +97,8 @@ class Header extends React.Component {
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                            <li><Link onClick={this.closeHiddenMenu} to="/">Clothing</Link></li>
-                            <li><Link onClick={this.closeHiddenMenu} to="/">Accessories</Link></li>
+                            <li><Link onClick={ ()=> {this.closeHiddenMenu(); this.scrollToClothing() } } to="/">Clothing</Link></li>
+                            <li><Link onClick={ ()=> {this.closeHiddenMenu(); this.scrollToAccessories() } } to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -102,8 +120,8 @@ class Header extends React.Component {
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                                <li><Link to="/">Clothing</Link></li>
-                                <li><Link to="/">Accessories</Link></li>
+                                <li><Link onClick={this.scrollToClothing} to="/">Clothing</Link></li>
+                                <li><Link onClick={this.scrollToAccessories} to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -148,4 +166,4 @@ const mapGlobalStateToProps = (globalState) => {
     }
 }
 
-export default connect(mapGlobalStateToProps)(Header);
+export default connect(mapGlobalStateToProps)(withRouter(Header));

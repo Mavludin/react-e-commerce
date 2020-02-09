@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { getProductDataForHomePage } from '../../Utils/APIController';
 import Preloader from '../../Components/Preloader/Preloader';
 
+import Slider from '../../Components/Slider/Slider';
+
 class HomePage extends React.Component {
 
     setMainTagMarginTop = () => {
@@ -81,15 +83,17 @@ class HomePage extends React.Component {
                 
                     <div className={mutualClasses.Container}>
 
+                        <Slider />
+
                         <div className={classes.Products}>
 
-                            <h1 className={classes.ClothesHeading}>Clothing for Men and Women</h1>
+                            <h1 ref={this.props.clothes} className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
                             <div className={classes.Clothes}>
                                 {clothesDataRender}
                             </div>
 
-                            <h2 className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
+                            <h2 ref={this.props.accessories} className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
 
                             <div className={classes.Accessories}>
                                 {AccessoriesDataRender}
