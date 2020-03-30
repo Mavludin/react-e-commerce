@@ -4,7 +4,7 @@ import classes from './HomePage.module.css';
 import mutualClasses from '../../App.module.css';
 
 import { Link } from 'react-router-dom';
-import { getProductDataForHomePage } from '../../Utils/APIController';
+import { getProductDataForHomePage } from '../../utils/APIController';
 import Preloader from '../../Components/Preloader/Preloader';
 
 import Slider from '../../Components/Slider/Slider';
@@ -77,35 +77,31 @@ class HomePage extends React.Component {
 
         return (
 
-            <main>
-                
-                <Preloader visible={this.state.showLoader} > 
-                
-                    <div className={mutualClasses.Container}>
+            <Preloader visible={this.state.showLoader} >
 
-                        <Slider />
+                <div className={mutualClasses.Container}>
 
-                        <div className={classes.Products}>
+                    <Slider />
 
-                            <h1 ref={this.props.clothes} className={classes.ClothesHeading}>Clothing for Men and Women</h1>
+                    <div className={classes.Products}>
 
-                            <div className={classes.Clothes}>
-                                {clothesDataRender}
-                            </div>
+                        <h1 ref={this.props.clothes} className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
-                            <h2 ref={this.props.accessories} className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
+                        <div className={classes.Clothes}>
+                            {clothesDataRender}
+                        </div>
 
-                            <div className={classes.Accessories}>
-                                {AccessoriesDataRender}
-                            </div>
+                        <h2 ref={this.props.accessories} className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
 
+                        <div className={classes.Accessories}>
+                            {AccessoriesDataRender}
                         </div>
 
                     </div>
 
-                </Preloader>
+                </div>
 
-            </main>
+            </Preloader>
 
         )
     }

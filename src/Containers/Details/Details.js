@@ -1,10 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import classes from './Details.module.css';
 import mutualClasses from '../../App.module.css';
 
-import { getDetailsData } from '../../Utils/APIController';
+import { getDetailsData } from '../../utils/APIController';
 import Preloader from '../../Components/Preloader/Preloader';
 
 class Details extends React.Component {
@@ -72,16 +72,16 @@ class Details extends React.Component {
     }
 
     if (window.matchMedia("(max-width: 600px)").matches) {
-      this.setState({ShowThumbnails: false})
+      this.setState({ ShowThumbnails: false })
     } else {
-      this.setState({ShowThumbnails: true})
+      this.setState({ ShowThumbnails: true })
     }
 
-    window.addEventListener('resize', ()=> {
+    window.addEventListener('resize', () => {
       if (window.matchMedia("(max-width: 600px)").matches) {
-        this.setState({ShowThumbnails: false})
+        this.setState({ ShowThumbnails: false })
       } else {
-        this.setState({ShowThumbnails: true})
+        this.setState({ ShowThumbnails: true })
       }
     })
 
@@ -99,10 +99,10 @@ class Details extends React.Component {
       }
 
       return (
-        <img 
-          onClick={() => this.selectCurrentThumbnail(pos)} 
-          className={ClassesArr.join(' ')} src={item} 
-          alt="Thumbnail" key={pos} 
+        <img
+          onClick={() => this.selectCurrentThumbnail(pos)}
+          className={ClassesArr.join(' ')} src={item}
+          alt="Thumbnail" key={pos}
         />
       )
 
@@ -112,36 +112,32 @@ class Details extends React.Component {
 
     return (
 
-      <main>
+      <Preloader visible={this.state.showPreLoader} >
 
-          <Preloader visible={this.state.showPreLoader} > 
-          
-            <div className={[mutualClasses.Container, classes.Details].join(' ')} >
+        <div className={[mutualClasses.Container, classes.Details].join(' ')} >
 
-              <div className={classes.Left}>
-                <img src={this.state.previewImage} alt={detailsDataRender.name} />
-              </div>
+          <div className={classes.Left}>
+            <img src={this.state.previewImage} alt={detailsDataRender.name} />
+          </div>
 
-              <div className={classes.Right}>
-                <h1>{detailsDataRender.name}</h1>
-                {!this.state.ShowThumbnails ? ShowThumbnails : null}
-                <p className={classes.Brand}>{detailsDataRender.brand}</p>
-                <p className={classes.Price}>
-                  Price: Rs <span>{detailsDataRender.price}</span>
-                </p>
-                <h3>Description</h3>
-                <p className={classes.Desc}>{detailsDataRender.description}</p>
-                <div>
-                  {this.state.ShowThumbnails ? ShowThumbnails : null}
-                </div>
-                <button onClick={this.onAddtoCartClick}>Add to Cart</button>
-              </div>
-
+          <div className={classes.Right}>
+            <h1>{detailsDataRender.name}</h1>
+            {!this.state.ShowThumbnails ? ShowThumbnails : null}
+            <p className={classes.Brand}>{detailsDataRender.brand}</p>
+            <p className={classes.Price}>
+              Price: Rs <span>{detailsDataRender.price}</span>
+            </p>
+            <h3>Description</h3>
+            <p className={classes.Desc}>{detailsDataRender.description}</p>
+            <div>
+              {this.state.ShowThumbnails ? ShowThumbnails : null}
             </div>
+            <button onClick={this.onAddtoCartClick}>Add to Cart</button>
+          </div>
 
-          </Preloader>
+        </div>
 
-      </main>
+      </Preloader>
 
     );
   }
@@ -149,7 +145,7 @@ class Details extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onIncrementAmountOfProducts: () => {dispatch({type:'INCREMENT_BY_ONE'})}
+    onIncrementAmountOfProducts: () => { dispatch({ type: 'INCREMENT_BY_ONE' }) }
   }
 }
 

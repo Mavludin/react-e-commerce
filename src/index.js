@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {createStore} from 'redux';
-import MainReducer from './Reducers/MainReducer';
-import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+import MainReducer from './store/MainReducer';
+import { Provider } from 'react-redux';
 
 const globalStore = createStore(MainReducer);
 

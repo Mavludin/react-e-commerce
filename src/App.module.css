@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i&display=swap');
 
+html, body {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Lato', sans-serif;
 }
 
+.App {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 main {
 	margin-top: 90px;
+	flex: 1 0 auto;
 }
 
 h1, h2 {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import classes from './Header.module.css';
 import mutualClasses from "../../App.module.css";
@@ -17,46 +17,46 @@ class Header extends React.Component {
     Overlay = React.createRef();
 
     state = {
-        hiddenMenuClasses : [classes.HiddenMenu],
+        hiddenMenuClasses: [classes.HiddenMenu],
         boxShadow: 'none'
     }
 
     showHiddenMenu = () => {
         let updatedClasses = this.state.hiddenMenuClasses;
         updatedClasses = [classes.HiddenMenu, classes.ShowHiddenMenu].join(' ')
-        this.setState({hiddenMenuClasses: updatedClasses});
+        this.setState({ hiddenMenuClasses: updatedClasses });
         this.Overlay.current.style.display = 'block';
     }
 
     closeHiddenMenu = () => {
         let updatedClasses = this.state.hiddenMenuClasses;
         updatedClasses = [classes.HiddenMenu];
-        this.setState({hiddenMenuClasses: updatedClasses});
+        this.setState({ hiddenMenuClasses: updatedClasses });
         this.Overlay.current.style.display = 'none';
     }
 
     listenScrollEvent = e => {
         if (window.scrollY > 10 && window.innerWidth >= 600) {
-          this.setState({boxShadow: 'rgb(204, 204, 204) 0px 2px 10px'})
+            this.setState({ boxShadow: 'rgb(204, 204, 204) 0px 2px 10px' })
         } else {
-          this.setState({boxShadow: 'none'})
+            this.setState({ boxShadow: 'none' })
         }
     }
 
     scrollToClothing = () => {
-        if (this.props.location.pathname !== "/" ) {
+        if (this.props.location.pathname !== "/") {
             this.props.history.push('/');
-            setTimeout(()=>Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop-90)), 500)
-        } else Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop-90));
+            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop - 90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(this.props.clothes.current.offsetTop - 90));
     }
 
     scrollToAccessories = () => {
-        if (this.props.location.pathname !== "/" ) {
+        if (this.props.location.pathname !== "/") {
             this.props.history.push('/');
-            setTimeout(()=>Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop-90)), 500)
-        } else Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop-90));
+            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop - 90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop - 90));
     }
-    
+
     render() {
 
         let CounterClass = "";
@@ -67,7 +67,7 @@ class Header extends React.Component {
 
         return (
 
-            <header style={{boxShadow: this.state.boxShadow}}>
+            <header style={{ boxShadow: this.state.boxShadow }}>
 
                 <div className={[mutualClasses.Container, classes.HeaderWrap].join(' ')}>
 
@@ -97,8 +97,8 @@ class Header extends React.Component {
                         </div>
                         <nav className={classes.TopMenu}>
                             <ul>
-                            <li><Link onClick={ ()=> {this.closeHiddenMenu(); this.scrollToClothing() } } to="/">Clothing</Link></li>
-                            <li><Link onClick={ ()=> {this.closeHiddenMenu(); this.scrollToAccessories() } } to="/">Accessories</Link></li>
+                                <li><Link onClick={() => { this.closeHiddenMenu(); this.scrollToClothing() }} to="/">Clothing</Link></li>
+                                <li><Link onClick={() => { this.closeHiddenMenu(); this.scrollToAccessories() }} to="/">Accessories</Link></li>
                             </ul>
                         </nav>
 
@@ -154,7 +154,7 @@ class Header extends React.Component {
                 <div ref={this.Overlay} onClick={this.closeHiddenMenu} className={classes.Overlay}></div>
 
             </header>
-         
+
         );
 
     }

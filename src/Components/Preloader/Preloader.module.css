@@ -1,3 +1,6 @@
-.Loader {
-    margin: 5%;
+.Preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }

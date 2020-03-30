@@ -11,22 +11,22 @@ import Four from '../../img/4.png';
 
 const Slider = () => {
     return (
-        <Carousel 
-            showIndicators={false} 
-            autoPlay={true} 
+        <Carousel
+            showIndicators={false}
+            autoPlay={true}
             className={classes.Slider}
         >
             <div>
-                <img src={One} alt="First Slide"/>
+                <img src={One} alt="First Slide" />
             </div>
             <div>
-                <img src={Two} alt="Second Slide"/>
+                <img src={Two} alt="Second Slide" />
             </div>
             <div>
-                <img src={Three} alt="Third Slide"/>
+                <img src={Three} alt="Third Slide" />
             </div>
             <div>
-                <img src={Four} alt="Fourth Slide"/>
+                <img src={Four} alt="Fourth Slide" />
             </div>
         </Carousel>
     );

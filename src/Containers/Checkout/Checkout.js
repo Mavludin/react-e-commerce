@@ -1,11 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
 import classes from './Checkout.module.css';
 import mutualClasses from '../../App.module.css';
-import { Endpoints } from '../../Utils/RouterEndpoints';
+import { Endpoints } from '../../utils/RouterEndpoints';
 
 class Checkout extends React.Component {
 
@@ -14,7 +14,7 @@ class Checkout extends React.Component {
     }
 
     OnPlaceOrder = () => {
-        localStorage().clear();
+        localStorage.clear();
         this.props.onOrderPlaced();
     }
 
@@ -46,35 +46,33 @@ class Checkout extends React.Component {
         }, 0);
 
         return (
-            <main>
-                <div className={[mutualClasses.Container, classes.Checkout].join(' ')} >
-                    <h1>Checkout</h1>
-                    <p className={classes.TotalItems}>Total items: {localStorage['amountOfProducts']}</p>
-                    <div className={classes.KindaBlock}>
+            <div className={[mutualClasses.Container, classes.Checkout].join(' ')} >
+                <h1>Checkout</h1>
+                <p className={classes.TotalItems}>Total items: {localStorage['amountOfProducts']}</p>
+                <div className={classes.KindaBlock}>
 
-                        <div className={classes.LeftCheck}>
-                            {arrayOfProducts}
-                        </div>
-
-                        <div className={classes.RightCheck}>
-                            <div className={classes.Total}>
-                                <h2>Total amount</h2>
-                                <p className={classes.Desc}>Total price: <span>{totalPrice}</span></p>
-                                <Link to={Endpoints.THANK}><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
-                            </div>
-                        </div>
-
+                    <div className={classes.LeftCheck}>
+                        {arrayOfProducts}
                     </div>
+
+                    <div className={classes.RightCheck}>
+                        <div className={classes.Total}>
+                            <h2>Total amount</h2>
+                            <p className={classes.Desc}>Total price: <span>{totalPrice}</span></p>
+                            <Link to={Endpoints.THANK}><button onClick={this.OnPlaceOrder}>Place Order</button></Link>
+                        </div>
+                    </div>
+
                 </div>
-            </main>
+            </div>
         );
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      onOrderPlaced: () => {dispatch({type:'ORDER_PLACED'})}
+        onOrderPlaced: () => { dispatch({ type: 'ORDER_PLACED' }) }
     }
-  }
-  
-  export default connect(null, mapDispatchToProps)(Checkout);
+}
+
+export default connect(null, mapDispatchToProps)(Checkout);
