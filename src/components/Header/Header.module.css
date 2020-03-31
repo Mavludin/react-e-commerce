@@ -58,7 +58,7 @@ header {
 	transform: translateX(0%);
 }
 
-.HiddenMenu>div>i {
+.HiddenMenu>div>svg {
 	color: black;
 	font-size: 26px;
 	position: absolute;
@@ -68,7 +68,7 @@ header {
 	transition: color .2s;
 }
 
-.HiddenMenu>div>i:hover {
+.HiddenMenu>div>svg:hover {
 	color: #007eff;
 }
 
@@ -110,16 +110,12 @@ form {
     box-sizing: border-box;
 }
 
-i {
+form svg {
 	color: gray;
-}
-
-form i {
 	position: absolute;
-	left: 4%;
+	left: 3%;
 	top: 50%;
 	transform: translate(0, -50%);
-	transition: .5s linear;
 }
 
 input {
@@ -143,14 +139,18 @@ input:focus::placeholder {
 .HiddenCart, .Cart {
 	display: flex;
 	align-items: center;
+	width: 100px;
+    justify-content: space-between;
 }
 
-.HiddenCart i, .Cart i {
-	font-size: 1.5em;
-	margin-right: 20px;
-	color: #000;
+.HiddenCart a, .Cart a {
 	position: relative;
 	margin-top: 10px;
+}
+
+.HiddenCart svg, .Cart svg {
+	font-size: 2em;
+	color: #000;
 }
 
 .HiddenCart {

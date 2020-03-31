@@ -5,9 +5,9 @@ import mutualClasses from '../../App.module.css';
 
 import { Link } from 'react-router-dom';
 import { getProductDataForHomePage } from '../../utils/APIController';
-import Preloader from '../../Components/Preloader/Preloader';
+import Preloader from '../../components/Preloader/Preloader';
 
-import Slider from '../../Components/Slider/Slider';
+import Slider from '../../components/Slider/Slider';
 
 class HomePage extends React.Component {
 

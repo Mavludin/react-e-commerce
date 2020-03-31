@@ -10,7 +10,7 @@ const Preloader = (props) => {
 
         props.visible ?
             <div className={classes.Preloader}>
-                <img src={preloaderIcon} alt="Preloader Icon"/>
+                <img src={preloaderIcon} alt="Preloader Icon" />
             </div>
             :
             props.children

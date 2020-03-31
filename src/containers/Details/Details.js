@@ -5,7 +5,7 @@ import classes from './Details.module.css';
 import mutualClasses from '../../App.module.css';
 
 import { getDetailsData } from '../../utils/APIController';
-import Preloader from '../../Components/Preloader/Preloader';
+import Preloader from '../../components/Preloader/Preloader';
 
 class Details extends React.Component {
 

@@ -12,6 +12,10 @@ import Scroll from 'react-scroll';
 
 import { withRouter } from 'react-router-dom';
 
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import SearchIcon from '@material-ui/icons/Search';
+
 class Header extends React.Component {
 
     Overlay = React.createRef();
@@ -57,6 +61,12 @@ class Header extends React.Component {
         } else Scroll.animateScroll.scrollTo(parseInt(this.props.accessories.current.offsetTop - 90));
     }
 
+    ifCartNotEmpty = (e) => {
+        if (this.props.totCount === 0) {
+            e.preventDefault();
+        }
+    }
+
     render() {
 
         let CounterClass = "";
@@ -79,11 +89,11 @@ class Header extends React.Component {
 
                     <div className={classes.HiddenCart}>
 
-                        <Link to='/checkout'>
-                            <i className="fas fa-cart-arrow-down" >
-                                <span className={CounterClass}>
-                                    {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
-                                </span></i>
+                        <Link onClick={(e) => this.ifCartNotEmpty(e)} to='/checkout'>
+                            <ShoppingCartIcon />
+                            <span className={CounterClass}>
+                                {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
+                            </span>
                         </Link>
 
                         <img className={classes.Avatar} src={avatar} alt="Avatar" />
@@ -103,11 +113,11 @@ class Header extends React.Component {
                         </nav>
 
                         <div onClick={this.closeHiddenMenu}>
-                            <i className="fas fa-window-close"></i>
+                            <HighlightOffIcon />
                         </div>
 
                         <form>
-                            <i className="fas fa-search"></i>
+                            <SearchIcon />
                             <input type="search" name="search" placeholder="Search for Clothing and Accessories" />
                         </form>
 
@@ -130,18 +140,17 @@ class Header extends React.Component {
                     <div className={classes.HeaderRight}>
 
                         <form>
-                            <i className="fas fa-search"></i>
+                            <SearchIcon />
                             <input type="search" name="search" placeholder="Search for Clothing and Accessories" />
                         </form>
 
                         <div className={classes.Cart}>
 
-                            <Link to='/checkout'>
-                                <i className="fas fa-cart-arrow-down" >
-                                    <span className={CounterClass}>
-                                        {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
-                                    </span>
-                                </i>
+                            <Link onClick={(e) => this.ifCartNotEmpty(e)} to='/checkout'>
+                                <ShoppingCartIcon />
+                                <span className={CounterClass}>
+                                    {this.props.totCount > 0 ? this.props.totCount : localStorage[('amountOfProducts')]}
+                                </span>
                             </Link>
 
                             <img className={classes.Avatar} src={avatar} alt="Avatar" />

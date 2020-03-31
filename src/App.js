@@ -3,12 +3,12 @@ import classes from './App.module.css';
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
-import Header from './Components/Header/Header';
-import HomePage from './Containers/Homepage/HomePage';
-import Details from './Containers/Details/Details';
-import Checkout from './Containers/Checkout/Checkout';
-import Thank from './Containers/Thank/Thank';
-import Footer from './Components/Footer/Footer';
+import Header from './components/Header/Header';
+import HomePage from './containers/Homepage/HomePage';
+import Details from './containers/Details/Details';
+import Checkout from './containers/Checkout/Checkout';
+import Thank from './containers/Thank/Thank';
+import Footer from './components/Footer/Footer';
 
 import { Endpoints } from './utils/RouterEndpoints';
 

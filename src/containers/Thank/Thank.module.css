@@ -1,0 +1,35 @@
+.Thank {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+}
+
+.Thank h1, p {
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.Desc {
+    color: #797979;
+}
+
+.Thank svg {
+	font-size: 15em;
+	color: #007eff;
+}
+
+@media screen and (max-width: 700px) {
+	.Thank svg {
+		font-size: 12em;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	.Thank svg {
+		font-size: 6em;
+	}
+}
