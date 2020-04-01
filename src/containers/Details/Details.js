@@ -9,6 +9,8 @@ import Preloader from '../../components/Preloader/Preloader';
 
 class Details extends React.Component {
 
+  _isMounted = false;
+
   state = {
     detailsData: {},
     thumbnails: [],
@@ -18,7 +20,7 @@ class Details extends React.Component {
     showPreLoader: true
   }
 
-  onAddtoCartClick = () => {
+  onAddToCartClick = () => {
 
     let AmountOfProducts;
     if (!localStorage['amountOfProducts']) AmountOfProducts = 0;
@@ -51,6 +53,7 @@ class Details extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const productId = this.props.match.params.productId;
 
     if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
@@ -85,6 +88,10 @@ class Details extends React.Component {
       }
     })
 
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   render() {
@@ -132,7 +139,7 @@ class Details extends React.Component {
             <div>
               {this.state.ShowThumbnails ? ShowThumbnails : null}
             </div>
-            <button onClick={this.onAddtoCartClick}>Add to Cart</button>
+            <button onClick={this.onAddToCartClick}>Add to Cart</button>
           </div>
 
         </div>

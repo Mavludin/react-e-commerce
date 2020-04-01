@@ -1,5 +1,5 @@
 const initialState = {
-    totalCount: 0
+    totalCount: 0 || parseInt(localStorage.getItem('amountOfProducts'))
 }
 
 const MainReducer = (previousState = initialState, action) => {

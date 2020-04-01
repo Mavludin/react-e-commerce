@@ -14,7 +14,7 @@ class Checkout extends React.Component {
     }
 
     OnPlaceOrder = () => {
-        localStorage.clear();
+        localStorage.removeItem('amountOfProducts');
         this.props.onOrderPlaced();
     }
 

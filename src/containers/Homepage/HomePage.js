@@ -40,7 +40,6 @@ class HomePage extends React.Component {
         const clothesDataRender = this.state.ProductData.map(item => {
             if (!item.isAccessory) {
                 return (
-
                     <figure key={item.id} id={item.id}>
                         <Link to={`/details/${item.id}`}>
                             <img src={item.preview} alt={item.name} />
@@ -51,14 +50,11 @@ class HomePage extends React.Component {
                             <p className={classes.Price}>{item.price}</p>
                         </figcaption>
                     </figure>
-
                 )
-            }
-
-
+            } else return false;
         });
 
-        const AccessoriesDataRender = this.state.ProductData.map(item => {
+        const accessoriesDataRender = this.state.ProductData.map(item => {
             if (item.isAccessory) {
                 return (
                     <figure key={item.id} id={item.id}>
@@ -72,7 +68,7 @@ class HomePage extends React.Component {
                         </figcaption>
                     </figure>
                 )
-            }
+            } else return false;
         });
 
         return (
@@ -94,7 +90,7 @@ class HomePage extends React.Component {
                         <h2 ref={this.props.accessories} className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
 
                         <div className={classes.Accessories}>
-                            {AccessoriesDataRender}
+                            {accessoriesDataRender}
                         </div>
 
                     </div>

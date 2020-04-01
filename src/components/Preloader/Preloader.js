@@ -4,17 +4,15 @@ import classes from './Preloader.module.css';
 
 import preloaderIcon from '../../img/preloader.gif';
 
-const Preloader = (props) => {
+const Preloader = ({ visible, children }) => {
 
     return (
-
-        props.visible ?
+        visible ?
             <div className={classes.Preloader}>
                 <img src={preloaderIcon} alt="Preloader Icon" />
             </div>
             :
-            props.children
-
+            children
     )
 
 }

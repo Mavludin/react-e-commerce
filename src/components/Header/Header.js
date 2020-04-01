@@ -99,7 +99,6 @@ class Header extends React.Component {
                         <img className={classes.Avatar} src={avatar} alt="Avatar" />
                     </div>
 
-
                     <div className={this.state.hiddenMenuClasses}>
 
                         <div className={classes.Logo}>
