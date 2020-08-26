@@ -1,72 +1,68 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import classes from './Details.module.css';
 import mutualClasses from '../../App.module.css';
 
 import { getDetailsData } from '../../utils/APIController';
-import Preloader from '../../components/Preloader/Preloader';
+import {Preloader} from '../../components/Preloader/Preloader';
 
-class Details extends React.Component {
+export const Details = (props) => {
 
-  _isMounted = false;
+  const [detailsData, setDetailsData] = useState({});
+  const [thumbnails, setThumbnails] = useState([]);
+  const [previewImage, setPreviewImage] = useState('');
+  const [thumbnailPos, setThumbnailPos] = useState(0);
+  const [showThumbnails, setShowThumbnails] = useState(true);
+  const [showPreLoader, setShowPreLoader] = useState(true);
 
-  state = {
-    detailsData: {},
-    thumbnails: [],
-    previewImage: '',
-    thumbnailPos: 0,
-    ShowThumbnails: true,
-    showPreLoader: true
-  }
+  const onIncrementAmountOfProducts = useDispatch();
 
-  onAddToCartClick = () => {
+  const onAddToCartClick = () => {
 
-    let AmountOfProducts;
-    if (!localStorage['amountOfProducts']) AmountOfProducts = 0;
+    let amountOfProducts;
+    if (!localStorage['amountOfProducts']) amountOfProducts = 0;
     else {
-      AmountOfProducts = localStorage['amountOfProducts'];
+      amountOfProducts = localStorage['amountOfProducts'];
     }
-    AmountOfProducts++;
-    this.props.onIncrementAmountOfProducts();
-    localStorage.setItem('amountOfProducts', AmountOfProducts);
+    amountOfProducts++;
+    onIncrementAmountOfProducts({ type: 'INCREMENT_BY_ONE' });
+    localStorage.setItem('amountOfProducts', amountOfProducts);
 
-    let AmountOfEachProduct;
-    if (!localStorage[`product_${this.props.match.params.productId}`]) AmountOfEachProduct = 0;
-    else AmountOfEachProduct = JSON.parse(localStorage[`product_${this.props.match.params.productId}`]).amount;
-    AmountOfEachProduct++;
+    let amountOfEachProduct;
+    if (!localStorage[`product_${props.match.params.productId}`]) amountOfEachProduct = 0;
+    else amountOfEachProduct = JSON.parse(localStorage[`product_${props.match.params.productId}`]).amount;
+    amountOfEachProduct++;
 
     const obj = {
-      'id': this.state.detailsData.id,
-      'thumbnail': this.state.detailsData.preview,
-      'name': this.state.detailsData.name,
-      'price': this.state.detailsData.price,
-      'amount': AmountOfEachProduct
+      'id': detailsData.id,
+      'thumbnail': detailsData.preview,
+      'name': detailsData.name,
+      'price': detailsData.price,
+      'amount': amountOfEachProduct
     };
 
-    localStorage.setItem(`product_${this.props.match.params.productId}`, JSON.stringify(obj));
+    localStorage.setItem(`product_${props.match.params.productId}`, JSON.stringify(obj));
 
   }
 
-  selectCurrentThumbnail = (pos) => {
-    this.setState({ previewImage: this.state.detailsData.photos[pos], thumbnailPos: pos })
+  const selectCurrentThumbnail = (pos) => {
+    setPreviewImage(detailsData.photos[pos]);
+    setThumbnailPos(pos);
   }
 
-  componentDidMount() {
-    this._isMounted = true;
-    const productId = this.props.match.params.productId;
+  useState(() => {
+
+    const productId = props.match.params.productId;
 
     if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
 
       getDetailsData(productId)
         .then(response => {
-          this.setState(
-            {
-              detailsData: response,
-              thumbnails: response.photos,
-              previewImage: response.photos[0],
-              showPreLoader: false
-            })
+          setDetailsData(response);
+          setThumbnails(response.photos)
+          setPreviewImage(response.photos[0])
+          setShowPreLoader(false)
         })
         .catch(error => {
           console.log(error)
@@ -74,86 +70,78 @@ class Details extends React.Component {
 
     }
 
+  }, [])
+
+  const handleThumbnails = () => {
     if (window.matchMedia("(max-width: 600px)").matches) {
-      this.setState({ ShowThumbnails: false })
+      setShowThumbnails(false)
     } else {
-      this.setState({ ShowThumbnails: true })
+      setShowThumbnails(true)
+    }
+  }
+
+  useEffect(()=>{
+
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      setShowThumbnails(false)
+    } else {
+      setShowThumbnails(true)
     }
 
-    window.addEventListener('resize', () => {
-      if (window.matchMedia("(max-width: 600px)").matches) {
-        this.setState({ ShowThumbnails: false })
-      } else {
-        this.setState({ ShowThumbnails: true })
-      }
-    })
+    window.addEventListener('resize', handleThumbnails);
+    return () => window.removeEventListener('resize', handleThumbnails);
 
-  }
+  }, [showThumbnails])
 
-  componentWillUnmount(){
-    this._isMounted = false;
-  }
+  const detailsDataRender = detailsData;
+  const Thumbnails = thumbnails.map((item, pos) => {
 
-  render() {
+    let ClassesArr = [classes.Thumbnail];
 
-    const detailsDataRender = this.state.detailsData;
-    const Thumbnails = this.state.thumbnails.map((item, pos) => {
-
-      let ClassesArr = [classes.Thumbnail];
-
-      if (pos === this.state.thumbnailPos) {
-        ClassesArr.push(classes.SelectedThumbnail);
-      }
-
-      return (
-        <img
-          onClick={() => this.selectCurrentThumbnail(pos)}
-          className={ClassesArr.join(' ')} src={item}
-          alt="Thumbnail" key={pos}
-        />
-      )
-
-    });
-
-    const ShowThumbnails = <div><h3>Preview</h3>{Thumbnails}</div>;
+    if (pos === thumbnailPos) {
+      ClassesArr.push(classes.SelectedThumbnail);
+    }
 
     return (
+      <img
+        onClick={() => selectCurrentThumbnail(pos)}
+        className={ClassesArr.join(' ')} src={item}
+        alt="Thumbnail" key={pos}
+      />
+    )
 
-      <Preloader visible={this.state.showPreLoader} >
+  });
 
-        <div className={[mutualClasses.Container, classes.Details].join(' ')} >
+  const renderThumbnails = <div><h3>Preview</h3>{Thumbnails}</div>;
 
-          <div className={classes.Left}>
-            <img src={this.state.previewImage} alt={detailsDataRender.name} />
-          </div>
+  return (
 
-          <div className={classes.Right}>
-            <h1>{detailsDataRender.name}</h1>
-            {!this.state.ShowThumbnails ? ShowThumbnails : null}
-            <p className={classes.Brand}>{detailsDataRender.brand}</p>
-            <p className={classes.Price}>
-              Price: Rs <span>{detailsDataRender.price}</span>
-            </p>
-            <h3>Description</h3>
-            <p className={classes.Desc}>{detailsDataRender.description}</p>
-            <div>
-              {this.state.ShowThumbnails ? ShowThumbnails : null}
-            </div>
-            <button onClick={this.onAddToCartClick}>Add to Cart</button>
-          </div>
+    <Preloader visible={showPreLoader} >
 
+      <div className={[mutualClasses.Container, classes.Details].join(' ')} >
+
+        <div className={classes.Left}>
+          <img src={previewImage} alt={detailsDataRender.name} />
         </div>
 
-      </Preloader>
+        <div className={classes.Right}>
+          <h1>{detailsDataRender.name}</h1>
+          {!showThumbnails ? renderThumbnails : null}
+          <p className={classes.Brand}>{detailsDataRender.brand}</p>
+          <p className={classes.Price}>
+            Price: Rs <span>{detailsDataRender.price}</span>
+          </p>
+          <h3>Description</h3>
+          <p className={classes.Desc}>{detailsDataRender.description}</p>
+          <div>
+            {showThumbnails ? renderThumbnails : null}
+          </div>
+          <button onClick={onAddToCartClick}>Add to Cart</button>
+        </div>
 
-    );
-  }
+      </div>
+
+    </Preloader>
+
+  );
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onIncrementAmountOfProducts: () => { dispatch({ type: 'INCREMENT_BY_ONE' }) }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Details);

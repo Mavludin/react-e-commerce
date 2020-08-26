@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classes from "./Footer.module.css";
 import mutualClasses from "../../App.module.css";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer>
 
@@ -54,5 +54,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

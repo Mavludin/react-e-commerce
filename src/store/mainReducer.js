@@ -2,13 +2,11 @@ const initialState = {
     totalCount: 0 || parseInt(localStorage.getItem('amountOfProducts'))
 }
 
-const MainReducer = (previousState = initialState, action) => {
+export const mainReducer = (state = initialState, action) => {
     if (action.type === 'INCREMENT_BY_ONE') {
-        return { totalCount: previousState.totalCount + 1 };
+        return { totalCount: state.totalCount + 1 };
     } else if (action.type === 'ORDER_PLACED') {
         return { totalCount: 0 };
     }
-    return { ...previousState }
+    return { ...state }
 }
-
-export default MainReducer;

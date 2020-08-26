@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
-import MainReducer from './store/MainReducer';
+import {mainReducer} from './store/mainReducer';
 import { Provider } from 'react-redux';
 
-const globalStore = createStore(MainReducer);
+const globalStore = createStore(mainReducer);
 
 ReactDOM.render(<Provider store={globalStore}> <App /> </Provider>, document.getElementById('root'));
 

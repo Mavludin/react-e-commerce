@@ -4,12 +4,12 @@ import { Carousel } from 'react-responsive-carousel';
 
 import classes from './Slider.module.css';
 
-import One from '../../img/1.png';
-import Two from '../../img/2.png';
-import Three from '../../img/3.png';
-import Four from '../../img/4.png';
+import One from '../../assets/images/1.png';
+import Two from '../../assets/images/2.png';
+import Three from '../../assets/images/3.png';
+import Four from '../../assets/images/4.png';
 
-const Slider = () => {
+export const Slider = () => {
     return (
         <Carousel
             showIndicators={false}
@@ -31,5 +31,3 @@ const Slider = () => {
         </Carousel>
     );
 }
-
-export default Slider;

@@ -22,7 +22,7 @@ footer h3 {
 
 footer h3::after {
 	content: " ";
-	background: url('../../img/footer-heading-border.jpg') bottom left repeat-x;
+	background: url('../../assets/images/footer-heading-border.jpg') bottom left repeat-x;
 	width: 150px;
 	height: 1px;
 	left: 0;

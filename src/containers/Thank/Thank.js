@@ -5,7 +5,7 @@ import mutualClasses from '../../App.module.css';
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-const Details = () => {
+export const Thank = () => {
     return (
         <div className={[mutualClasses.Container, classes.Thank].join(' ')} >
             <CheckCircleIcon />
@@ -14,5 +14,3 @@ const Details = () => {
         </div>
     );
 }
-
-export default Details;
