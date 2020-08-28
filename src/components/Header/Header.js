@@ -23,6 +23,22 @@ const TopBar = (props) => {
 
     const overlay = React.createRef();
 
+    useEffect(()=>{
+
+        const handleBoxShadow = () => {
+            if (window.scrollY > 0 && window.innerWidth >= 600) {
+                setBoxShadow('rgb(204, 204, 204) 0px 2px 10px')
+            } else {
+                setBoxShadow('none')
+            }
+        }
+
+        window.addEventListener('scroll', handleBoxShadow)
+
+        return () => window.removeEventListener('scroll', handleBoxShadow)
+
+    }, [])
+
     const showHiddenMenu = () => {
         let updatedClasses = hiddenMenuClasses;
         updatedClasses = [classes.HiddenMenu, classes.ShowHiddenMenu].join(' ')
@@ -56,22 +72,6 @@ const TopBar = (props) => {
             e.preventDefault();
         }
     }
-
-    const handleBoxShadow = () => {
-        if (window.scrollY > 0 && window.innerWidth >= 600) {
-            setBoxShadow('rgb(204, 204, 204) 0px 2px 10px')
-        } else {
-            setBoxShadow('none')
-        }
-    }
-
-    useEffect(()=>{
-
-        window.addEventListener('scroll', handleBoxShadow)
-
-        return () => window.removeEventListener('scroll', handleBoxShadow)
-
-    }, [boxShadow])
 
     let counterClass = "";
 

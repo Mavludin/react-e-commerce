@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import classes from './HomePage.module.css';
 import mutualClasses from '../../App.module.css';
@@ -14,7 +14,7 @@ export const HomePage = ({ clothes, accessories }) => {
     const [productData, setProductData] = useState([]);
     const [showLoader, setShowLoader] = useState(true);
 
-    useEffect(() => {
+    const fetchData = useCallback(()=>{
         getProductDataForHomePage()
             .then(response => {
                 setProductData(response);
@@ -24,6 +24,8 @@ export const HomePage = ({ clothes, accessories }) => {
                 console.log(error);
             })
     }, [])
+
+    useEffect(fetchData, [fetchData])
 
     const clothesDataRender = productData.map(item => {
         if (!item.isAccessory) {

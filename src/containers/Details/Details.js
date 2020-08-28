@@ -5,7 +5,7 @@ import classes from './Details.module.css';
 import mutualClasses from '../../App.module.css';
 
 import { getDetailsData } from '../../utils/APIController';
-import {Preloader} from '../../components/Preloader/Preloader';
+import { Preloader } from '../../components/Preloader/Preloader';
 
 export const Details = (props) => {
 
@@ -51,8 +51,7 @@ export const Details = (props) => {
     setThumbnailPos(pos);
   }
 
-  useState(() => {
-
+  useEffect(() => {
     const productId = props.match.params.productId;
 
     if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
@@ -70,17 +69,17 @@ export const Details = (props) => {
 
     }
 
-  }, [])
+  }, [props.match.params.productId])
 
-  const handleThumbnails = () => {
-    if (window.matchMedia("(max-width: 600px)").matches) {
-      setShowThumbnails(false)
-    } else {
-      setShowThumbnails(true)
+  useEffect(() => {
+
+    const handleThumbnails = () => {
+      if (window.matchMedia("(max-width: 600px)").matches) {
+        setShowThumbnails(false)
+      } else {
+        setShowThumbnails(true)
+      }
     }
-  }
-
-  useEffect(()=>{
 
     if (window.matchMedia("(max-width: 600px)").matches) {
       setShowThumbnails(false)
@@ -91,7 +90,7 @@ export const Details = (props) => {
     window.addEventListener('resize', handleThumbnails);
     return () => window.removeEventListener('resize', handleThumbnails);
 
-  }, [showThumbnails])
+  }, [])
 
   const detailsDataRender = detailsData;
   const Thumbnails = thumbnails.map((item, pos) => {
