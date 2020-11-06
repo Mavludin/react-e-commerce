@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import classes from './Details.module.css';
-import mutualClasses from '../../App.module.css';
 
-import { getDetailsData } from '../../utils/APIController';
+import { fetchProductDetails } from '../../utils/APIController';
 import { Preloader } from '../../components/Preloader/Preloader';
 
-export const Details = (props) => {
+export const Details = ({ match }) => {
 
   const [detailsData, setDetailsData] = useState({});
   const [thumbnails, setThumbnails] = useState([]);
@@ -30,8 +29,8 @@ export const Details = (props) => {
     localStorage.setItem('amountOfProducts', amountOfProducts);
 
     let amountOfEachProduct;
-    if (!localStorage[`product_${props.match.params.productId}`]) amountOfEachProduct = 0;
-    else amountOfEachProduct = JSON.parse(localStorage[`product_${props.match.params.productId}`]).amount;
+    if (!localStorage[`product_${match.params.productId}`]) amountOfEachProduct = 0;
+    else amountOfEachProduct = JSON.parse(localStorage[`product_${match.params.productId}`]).amount;
     amountOfEachProduct++;
 
     const obj = {
@@ -42,7 +41,7 @@ export const Details = (props) => {
       'amount': amountOfEachProduct
     };
 
-    localStorage.setItem(`product_${props.match.params.productId}`, JSON.stringify(obj));
+    localStorage.setItem(`product_${match.params.productId}`, JSON.stringify(obj));
 
   }
 
@@ -52,11 +51,11 @@ export const Details = (props) => {
   }
 
   useEffect(() => {
-    const productId = props.match.params.productId;
+    const productId = match.params.productId;
 
     if (productId !== undefined && productId !== null && productId !== '' && parseInt(productId) > 0) {
 
-      getDetailsData(productId)
+      fetchProductDetails(productId)
         .then(response => {
           setDetailsData(response);
           setThumbnails(response.photos)
@@ -69,7 +68,7 @@ export const Details = (props) => {
 
     }
 
-  }, [props.match.params.productId])
+  }, [match.params.productId])
 
   useEffect(() => {
 
@@ -79,12 +78,6 @@ export const Details = (props) => {
       } else {
         setShowThumbnails(true)
       }
-    }
-
-    if (window.matchMedia("(max-width: 600px)").matches) {
-      setShowThumbnails(false)
-    } else {
-      setShowThumbnails(true)
     }
 
     window.addEventListener('resize', handleThumbnails);
@@ -117,7 +110,7 @@ export const Details = (props) => {
 
     <Preloader visible={showPreLoader} >
 
-      <div className={[mutualClasses.Container, classes.Details].join(' ')} >
+      <div className={classes.Details} >
 
         <div className={classes.Left}>
           <img src={previewImage} alt={detailsDataRender.name} />

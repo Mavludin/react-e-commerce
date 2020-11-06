@@ -1,21 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classes from './HomePage.module.css';
-import mutualClasses from '../../App.module.css';
 
 import { Link } from 'react-router-dom';
-import { getProductDataForHomePage } from '../../utils/APIController';
-import {Preloader} from '../../components/Preloader/Preloader';
+import { fetchProducts } from '../../utils/APIController';
+import { Preloader } from '../../components/Preloader/Preloader';
 
-import {Slider} from '../../components/Slider/Slider';
+import { Slider } from '../../components/Slider/Slider';
 
 export const HomePage = ({ clothes, accessories }) => {
 
     const [productData, setProductData] = useState([]);
     const [showLoader, setShowLoader] = useState(true);
 
-    const fetchData = useCallback(()=>{
-        getProductDataForHomePage()
+    useEffect(()=>{
+        fetchProducts()
             .then(response => {
                 setProductData(response);
                 setShowLoader(false);
@@ -24,8 +23,6 @@ export const HomePage = ({ clothes, accessories }) => {
                 console.log(error);
             })
     }, [])
-
-    useEffect(fetchData, [fetchData])
 
     const clothesDataRender = productData.map(item => {
         if (!item.isAccessory) {
@@ -65,16 +62,14 @@ export const HomePage = ({ clothes, accessories }) => {
 
         <Preloader visible={showLoader} >
 
-            <div className={mutualClasses.Container}>
+            <Slider />
 
-                <Slider />
+            <div className={classes.Products}>
 
-                <div className={classes.Products}>
+                <h1 ref={clothes} className={classes.ClothesHeading}>Clothing for Men and Women</h1>
 
-                    <h1 ref={clothes} className={classes.ClothesHeading}>Clothing for Men and Women</h1>
-
-                    <div className={classes.Clothes}>
-                        {clothesDataRender}
+                <div className={classes.Clothes}>
+                    {clothesDataRender}
                     </div>
 
                     <h2 ref={accessories} className={classes.AccessoriesHeading}>Accessories for Men and Women</h2>
@@ -84,8 +79,6 @@ export const HomePage = ({ clothes, accessories }) => {
                     </div>
 
                 </div>
-
-            </div>
 
         </Preloader>
 

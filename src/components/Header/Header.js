@@ -2,28 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import classes from './Header.module.css';
-import mutualClasses from "../../App.module.css";
 
 import avatar from '../../assets/images/avatar.jpg';
 
 import Scroll from 'react-scroll';
 
-import { withRouter, Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import SearchIcon from '@material-ui/icons/Search';
 
-const TopBar = (props) => {
+export const Header = ({ totCount, clothes, accessories }) => {
 
-    const [hiddenMenuClasses, setHiddenMenuClasses] = useState([classes.HiddenMenu]);
     const [boxShadow, setBoxShadow] = useState('none');
 
-    const totalCount = useSelector(state => state.totalCount)
+    const totalCount = useSelector(state => state.totalCount);
+    const [mobileMenuFlag, setMobileMenuFlag] = useState(false);
 
-    const overlay = React.createRef();
+    const history = useHistory();
+    const location = useLocation();
 
-    useEffect(()=>{
+    useEffect(() => {
 
         const handleBoxShadow = () => {
             if (window.scrollY > 0 && window.innerWidth >= 600) {
@@ -39,38 +39,32 @@ const TopBar = (props) => {
 
     }, [])
 
-    const showHiddenMenu = () => {
-        let updatedClasses = hiddenMenuClasses;
-        updatedClasses = [classes.HiddenMenu, classes.ShowHiddenMenu].join(' ')
-        setHiddenMenuClasses(updatedClasses)
-        overlay.current.style.display = 'block';
-    }
-
-    const closeHiddenMenu = () => {
-        let updatedClasses = hiddenMenuClasses;
-        updatedClasses = [classes.HiddenMenu];
-        setHiddenMenuClasses(updatedClasses)
-        overlay.current.style.display = 'none';
-    }
-
     const scrollToClothing = () => {
-        if (props.location.pathname !== "/") {
-            props.history.push('/');
-            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(props.clothes.current.offsetTop - 90)), 500)
-        } else Scroll.animateScroll.scrollTo(parseInt(props.clothes.current.offsetTop - 90));
+        if (location.pathname !== "/") {
+            history.push('/');
+            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(clothes.current.offsetTop - 90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(clothes.current.offsetTop - 90));
     }
 
     const scrollToAccessories = () => {
-        if (props.location.pathname !== "/") {
-            props.history.push('/');
-            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(props.accessories.current.offsetTop - 90)), 500)
-        } else Scroll.animateScroll.scrollTo(parseInt(props.accessories.current.offsetTop - 90));
+        if (location.pathname !== "/") {
+            history.push('/');
+            setTimeout(() => Scroll.animateScroll.scrollTo(parseInt(accessories.current.offsetTop - 90)), 500)
+        } else Scroll.animateScroll.scrollTo(parseInt(accessories.current.offsetTop - 90));
     }
 
     const ifCartNotEmpty = (e) => {
-        if (props.totCount === 0) {
+        if (totCount === 0) {
             e.preventDefault();
         }
+    }
+
+    const closeMobileMenu = () => {
+        setMobileMenuFlag(false)
+    }
+
+    const showMobileMenu = () => {
+        setMobileMenuFlag(true)
     }
 
     let counterClass = "";
@@ -79,19 +73,24 @@ const TopBar = (props) => {
         counterClass = classes.Counter;
     }
 
+    let mobileMenuClasses = '';
+
+    if (mobileMenuFlag) mobileMenuClasses = `${classes.MobileMenu} ${classes.ShowMobileMenu}`
+    else mobileMenuClasses = classes.MobileMenu
+
     return (
 
         <header style={{ boxShadow: boxShadow }}>
 
-            <div className={[mutualClasses.Container, classes.HeaderWrap].join(' ')}>
+            <div className={`container ${classes.HeaderWrap}`}>
 
-                <div onClick={showHiddenMenu} className={classes.Hamb}>
+                <div onClick={showMobileMenu} className={classes.Hamb}>
                     <div className={classes.Bar1}></div>
                     <div className={classes.Bar2}></div>
                     <div className={classes.Bar3}></div>
                 </div>
 
-                <div className={classes.HiddenCart}>
+                <div className={classes.MobileCart}>
 
                     <Link onClick={(e) => ifCartNotEmpty(e)} to='/checkout'>
                         <ShoppingCartIcon />
@@ -102,20 +101,20 @@ const TopBar = (props) => {
 
                     <img className={classes.Avatar} src={avatar} alt="Avatar" />
                 </div>
-
-                <div className={hiddenMenuClasses}>
+                
+                <div className={mobileMenuClasses}>
 
                     <div className={classes.Logo}>
-                        <Link onClick={closeHiddenMenu} to="/">Shop<span>Lane</span></Link>
+                        <Link onClick={closeMobileMenu} to="/">Shop<span>Lane</span></Link>
                     </div>
                     <nav className={classes.TopMenu}>
                         <ul>
-                            <li><Link onClick={() => { closeHiddenMenu(); scrollToClothing() }} to="/">Clothing</Link></li>
-                            <li><Link onClick={() => { closeHiddenMenu(); scrollToAccessories() }} to="/">Accessories</Link></li>
+                            <li><Link onClick={() => { closeMobileMenu(); scrollToClothing() }} to="/">Clothing</Link></li>
+                            <li><Link onClick={() => { closeMobileMenu(); scrollToAccessories() }} to="/">Accessories</Link></li>
                         </ul>
                     </nav>
 
-                    <div onClick={closeHiddenMenu}>
+                    <div onClick={closeMobileMenu}>
                         <HighlightOffIcon />
                     </div>
 
@@ -125,7 +124,7 @@ const TopBar = (props) => {
                     </form>
 
                 </div>
-
+                
                 <div className={classes.HeaderLeft}>
 
                     <div className={classes.Logo}>
@@ -163,11 +162,13 @@ const TopBar = (props) => {
 
             </div>
 
-            <div ref={overlay} onClick={closeHiddenMenu} className={classes.Overlay}></div>
+            {
+                mobileMenuFlag 
+                    ? <div onClick={closeMobileMenu} className={classes.Overlay}></div>
+                    : null
+            }
 
         </header>
 
     );
 }
-
-export const Header = withRouter(TopBar)

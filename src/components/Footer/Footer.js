@@ -3,13 +3,11 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 import classes from "./Footer.module.css";
-import mutualClasses from "../../App.module.css";
 
 export const Footer = () => {
   return (
     <footer>
-
-      <div className={[mutualClasses.Container, classes.FooterWrap].join(" ")}>
+      <div className={`container ${classes.Footer}`}>
 
         <div>
           <h3>Online store</h3>

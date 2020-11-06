@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import classes from './Checkout.module.css';
-import mutualClasses from '../../App.module.css';
 import { endpoints } from '../../utils/routerEndpoints';
 
 export const Checkout = () => {
@@ -46,7 +45,7 @@ export const Checkout = () => {
     }, 0);
 
     return (
-        <div className={[mutualClasses.Container, classes.Checkout].join(' ')} >
+        <div className={classes.Checkout}>
             <h1>Checkout</h1>
             <p className={classes.TotalItems}>Total items: {localStorage['amountOfProducts']}</p>
             <div className={classes.KindaBlock}>

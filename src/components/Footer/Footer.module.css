@@ -5,7 +5,7 @@ footer {
 	flex-shrink: 0;
 }
 
-.FooterWrap {
+.Footer {
   display: flex;
   justify-content: space-around;
 }
@@ -49,11 +49,11 @@ footer a:hover {
 
 @media screen and (max-width: 900px) {
 
-	.FooterWrap div {
+	.Footer div {
 		width: 40%;
 	}
 
-	.FooterWrap {
+	.Footer {
 		flex-wrap: wrap;
 		justify-content: end;
 	}
@@ -66,7 +66,7 @@ footer a:hover {
 
 @media screen and (max-width: 600px) {
 
-	.FooterWrap div {
+	.Footer div {
 		width: 90%;
 	}
 
