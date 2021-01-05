@@ -1,5 +1,3 @@
-import React from 'react';
-
 import classes from './Preloader.module.css';
 
 import preloaderIcon from '../../assets/images/preloader.gif';

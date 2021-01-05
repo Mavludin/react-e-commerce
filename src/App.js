@@ -1,4 +1,4 @@
-import React from 'react';
+import { createRef } from 'react';
 import './App.css';
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
@@ -14,8 +14,8 @@ import { endpoints } from './utils/routerEndpoints';
 
 const App = () => {
 
-  const clothes = React.createRef();
-  const accessories = React.createRef();
+  const clothes = createRef();
+  const accessories = createRef();
 
   return (
     <BrowserRouter>
